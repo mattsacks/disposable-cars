@@ -53,6 +53,7 @@ event.on('json', function(json) {
   var interval = Math.floor(new Date().getMinutes() / 10);
   // reset the timestamp to an interval of 10 minutes
   var timestamp = new Date();
+  timestamp.setMilliseconds(0);
   timestamp.setSeconds(0);
   timestamp.setMinutes(10 * interval);
 
