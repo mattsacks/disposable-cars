@@ -11,9 +11,9 @@ var event = new Emitter().constructor.prototype;
 // TODO check if the file exists, if not then throw an error
 var OAUTH_KEY = fs.readFileSync('C2G_OAUTH_KEY', 'utf8').trim();
 
-// read in existing JSON data
+// get in existing JSON data
 // TODO check if the file exists, if not then let cars be an empty object
-var cars = JSON.parse(fs.readFileSync('cars.json', 'utf8'));
+var cars = require('./cars').cars || {};
 
 // url string
 var vehiclesString = querystring.stringify({
@@ -75,6 +75,13 @@ event.on('json', function(json) {
     locations[+timestamp] = availableCar.coordinates;
   }
 
+  // string of code to test if window or exports to evaluate as javascript
+  var globalString =
+    ";\nif (module.exports != null) exports.cars = cars;\nelse window.cars = cars;";
+
   // write the JSON out
-  fs.writeFileSync('cars.json', JSON.stringify(cars));
+  fs.writeFileSync(
+    'cars.js',
+    "var cars = " + JSON.stringify(cars) + globalString
+  );
 });
