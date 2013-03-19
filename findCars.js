@@ -15,6 +15,18 @@ var OAUTH_KEY = fs.readFileSync('C2G_OAUTH_KEY', 'utf8').trim();
 // TODO check if the file exists, if not then let cars be an empty object
 var cars = require('./cars').cars || {};
 
+// go through the JSON and remove any coordinates that are older than 5 days
+// this is pretty inefficient but makes it easier to work with the JSON in the
+// browser
+var today = new Date().getDay();
+for (var car in cars) {
+  for (var timestamp in cars[car]) {
+    // if the timestamp is 5 days old, delete it
+    if (new Date(+timestamp).getDay() + 5 < today)
+      delete cars[car];
+  }
+}
+
 // url string
 var vehiclesString = querystring.stringify({
   loc: 'portland',
@@ -63,16 +75,11 @@ event.on('json', function(json) {
     var name = availableCar.name;
     var car = cars[name];
 
-    // create the array of locations for the car if it doesn't exist
-    if (car == null) car = cars[name] = [{}];
+    // create an object for the car if it doesn't exist
+    if (car == null) car = cars[name] = {};
 
-    // TODO if the length of the car days is 6, then pop the last one off
-
-    // today's locations 
-    var locations = car[0];
-    
     // add a key for the current 10 minute interval and 
-    locations[+timestamp] = availableCar.coordinates;
+    car[+timestamp] = availableCar.coordinates;
   }
 
   // string of code to test if window or exports to evaluate as javascript
