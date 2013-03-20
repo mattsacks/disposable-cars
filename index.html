@@ -6,8 +6,35 @@
     <meta name="description" content="A visualization of car2go migration patterns in Portland, OR">
     <meta name="author" content="Matt Sacks">
     <link rel="stylesheet" type="text/css" media="screen" href="">
+    <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+    <style>
+      html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+      }
+      #map {
+	bottom: 10px;
+	height: 600px;
+	position: relative;
+	top: 10px;
+	width: 100%;
+      }
+    </style>
     <script src="cars.js"></script>
   </head>
   <body>
+  <div id="map"></div>
+  <script>
+    // create map
+    layer = mapbox.layer().id('mattsacks.map-pnviow60');
+    // disable panning + zooming
+    map = mapbox.map('map', layer, null, []);
+    map.centerzoom({
+      lat: 45.53752364902761,
+      lon: -122.63411792602537
+    }, 13);
+  </script>
   </body>
 </html>
