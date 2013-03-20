@@ -84,7 +84,7 @@ event.on('json', function(json) {
 
   // string of code to test if window or exports to evaluate as javascript
   var globalString =
-    ";\nif (typeof module !== 'undefined' && this.module !== module) exports.cars = cars;\nelse window.cars = cars;";
+    ";\nif (typeof module !== 'undefined') exports.cars = cars;\nelse window.cars = cars;";
 
   // write the JSON out
   fs.writeFileSync(
