@@ -12,18 +12,31 @@ var event = new Emitter().constructor.prototype;
 var OAUTH_KEY = fs.readFileSync('C2G_OAUTH_KEY', 'utf8').trim();
 
 // get in existing JSON data
-// TODO check if the file exists, if not then let cars be an empty object
 var cars = require('./cars').cars || {};
 
+// set a date to it's midnight
+Date.prototype.clearTime = function() {
+  this.setMilliseconds(0);
+  this.setSeconds(0);
+  this.setMinutes(0);
+  this.setHours(0);
+  return this;
+};
+
+var today = +new Date().clearTime();
+var aDay = 86400000;
+
 // go through the JSON and remove any coordinates that are older than 5 days
-// this is pretty inefficient but makes it easier to work with the JSON in the
-// browser
-var today = new Date().getDay();
 for (var car in cars) {
   for (var timestamp in cars[car]) {
+    // clone of the key set to 00:00:00
+    var date = new Date(+timestamp).clearTime();
+
+    // clone of the timestamp set to 5 days later
+    var later = +new Date(date).setTime(+date + (aDay * 5));
+
     // if the timestamp is 5 days old, delete it
-    if (new Date(+timestamp).getDay() + 5 < today)
-      delete cars[car];
+    if (later - today < 0) delete cars[car][timestamp];
   }
 }
 
