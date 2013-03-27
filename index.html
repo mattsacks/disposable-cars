@@ -14,11 +14,12 @@
 	margin: 0;
 	padding: 0;
       }
+      body {
+	background-color: #f0f0ee;
+      }
       #map {
-	bottom: 10px;
 	height: 600px;
 	position: relative;
-	top: 10px;
 	width: 100%;
       }
     </style>
@@ -32,8 +33,8 @@
     // disable panning + zooming
     map = mapbox.map('map', layer, null, []);
     map.centerzoom({
-      lat: 45.53752364902761,
-      lon: -122.63411792602537
+      lat: 45.53252364902761,
+      lon: -122.63711792602537
     }, 13);
   </script>
   </body>
