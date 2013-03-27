@@ -1,0 +1,47 @@
+@import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
+@import url(http://fonts.googleapis.com/css?family=Merriweather:700);
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+a {
+  text-decoration: none; }
+
+body {
+  background-color: #f0f0ee; }
+
+h1 {
+  font-family: "Permanent Marker";
+  font-weight: 400;
+  color: #555;
+  font-size: 65px;
+  margin: 5px 0; }
+
+h2 {
+  font-family: "Permanent Marker";
+  font-weight: 400;
+  color: #555;
+  font-size: 25px;
+  margin: 0; }
+
+#header {
+  text-align: center; }
+
+#footer {
+  text-align: center; }
+
+a {
+  -webkit-transition: color 0.05s linear;
+  -moz-transition: color 0.05s linear;
+  -ms-transition: color 0.05s linear;
+  transition: color 0.05s linear;
+  color: #3589ac; }
+  a:hover {
+    color: #3180a0; }
+
+#map {
+  margin: 20px 0;
+  height: 600px;
+  position: relative;
+  width: 100%; }

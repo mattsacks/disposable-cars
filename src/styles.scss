@@ -1,0 +1,72 @@
+@import 'mixins';
+
+// ----- Fonts
+@import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
+@import url(http://fonts.googleapis.com/css?family=Merriweather:700);
+
+// ----- Colors
+$link-color: #3589ac;
+
+// ----- Font Families
+@mixin font-marker {
+  font-family: "Permanent Marker";
+  font-weight: 400;
+}
+
+// ----- Reset
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+// ----- Body
+body {
+  background-color: #f0f0ee;
+}
+
+// ----- Headings
+h1 {
+  @include font-marker;
+  color: #555;
+  font-size: 65px;
+  margin: 5px 0;
+}
+
+h2 {
+  @include font-marker;
+  color: #555;
+  font-size: 25px;
+  // font-family: "Merriweather";
+  // font-weight: 700;
+  margin: 0;
+}
+
+#header {
+  text-align: center;
+}
+#footer {
+  text-align: center;
+}
+
+// ----- Links
+a {
+  @include transition(color 0.05s linear);
+  color: $link-color;
+
+  &:hover {
+    color: darken($link-color, 3%);
+  }
+}
+
+// ----- Map
+#map {
+  margin: 20px 0;
+  height: 600px;
+  position: relative;
+  width: 100%;
+}

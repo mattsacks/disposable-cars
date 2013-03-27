@@ -1,0 +1,19 @@
+// ----- Lib
+@mixin experimental($style, $value) {
+  -webkit-#{$style}: $value;
+  -moz-#{$style}: $value;
+  -ms-#{$style}: $value;
+  #{$style}: $value;
+}
+
+@mixin experimental-value($style, $value) {
+  #{$style}: -webkit-#{$value};
+  #{$style}: -moz-#{$value};
+  #{$style}: -ms-#{$value};
+  #{$style}: #{$value};
+}
+
+// ----- Transitions
+@mixin transition($transition) {
+  @include experimental(transition, $transition);
+}
