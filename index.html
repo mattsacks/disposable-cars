@@ -13,12 +13,22 @@
   <div id="header">
     <h1>Disposable Cars</h1>
   </div>
+  <div id="dayPicker"></div>
   <div id="map"></div>
   <div id="footer">
     <h2>by <a class="text-link" href="http://sacks.io">Matt Sacks</a></h2>
   </div>
-
+  <script id="dayPicker-template" type="text/x-template">
+    <ul id="day-picker">
+      {{#days}}
+	<li class="day" data-day="{{.}}">
+	  {{dayText}}
+	</li>
+      {{/days}}
+    </ul>
+  </script>
   <script type="text/javascript" src="cars.js"></script>
+  <script type="text/javascript" src="lib/mustache.min.js"></script>
   <script type="text/javascript" src="lib/scripts.js"></script>
   </body>
 </html>
