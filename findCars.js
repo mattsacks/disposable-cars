@@ -25,17 +25,18 @@ Date.prototype.clearTime = function() {
 
 var today = +new Date().clearTime();
 var aDay = 86400000;
+var nDays = 5;
 
-// go through the JSON and remove any coordinates that are older than 5 days
+// go through the JSON and remove any coordinates that are older than nDays
 for (var car in cars) {
   for (var timestamp in cars[car]) {
     // clone of the key set to 00:00:00
     var date = new Date(+timestamp).clearTime();
 
     // clone of the timestamp set to 5 days later
-    var later = +new Date(date).setTime(+date + (aDay * 5));
+    var later = +new Date(date).setTime(+date + (aDay * nDays));
 
-    // if the timestamp is 5 days old, delete it
+    // if the timestamp + 5 days is older than today, delete it
     if (later - today < 0) delete cars[car][timestamp];
   }
 }
@@ -64,7 +65,7 @@ https.get(findCars, function(res) {
 
   // when the data is finished streaming
   res.on('end', function() {
-    // parse the JSON and let others know we're done
+    // parse the JSON now that we're done
     event.emit('json', JSON.parse(json));
   });
 });
