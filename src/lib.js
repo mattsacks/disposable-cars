@@ -20,14 +20,27 @@ Date.prototype.clearTime = function() {
   return this;
 };
 
+// decrease the Date {range} by {amount}
 Date.prototype.decrement = function(range, amount) {
   var change = Date.day;
   if (range === 'week') change *= 7;
   // TODO moar ranges
 
   change *= amount;
-  return this.setTime(+this - change).valueOf();
+
+  // return a date object, not the date time
+  return new Date(this.setTime(+this - change));
 };
+
+// single-purpose utility of today's nth interval in 10-minutes
+Date.nowsTenth = (function() {
+  var interval = Math.floor(new Date().getMinutes() / 10);
+  var today = new Date();
+  today.setMilliseconds(0);
+  today.setSeconds(0);
+  today.setMinutes(10 * interval);
+  return today;
+})();
 
 // return a Mustache function of the a template element's innerHTML
 var getTemplate = function(id) {
