@@ -8,6 +8,7 @@
 // ----- Colors
 $link-color: #3589ac;
 $font-color: #555;
+$border-color: #BBB;
 
 // ----- Font Families
 @mixin font-marker {
@@ -15,13 +16,13 @@ $font-color: #555;
   font-weight: 400;
 }
 
-@mixin font-stat {
+@mixin font-cute {
   font-family: "Shadows Into Light Two";
   font-weight: 400;
 }
 
 // ----- Values
-$map-height: 700px;
+$map-height: 625px;
 
 // ----- Reset
 html, body {
@@ -43,7 +44,7 @@ body {
 // ----- Headings
 h1 {
   @include font-marker;
-  font-size: 65px;
+  font-size: 62px;
   margin: 5px 0;
 
   @include mobile {
@@ -61,6 +62,7 @@ h2 {
   text-align: center;
 }
 #footer {
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -78,12 +80,12 @@ a {
 // ----- Stats Headings
 .stats-container {
   position: absolute;
-  top: 110px;
+  top: 105px;
   z-index: 2;
   width: 100%;
 }
 .stat {
-  @include font-stat;
+  @include font-cute;
   font-size: 40px;
   vertical-align: top;
 }
@@ -97,16 +99,8 @@ a {
   right: 20px;
 }
 
-// ----- Timeline
-#timeline {
-  height: 100px;
-  margin: 0 auto;
-  width: 80%;
-}
-
 // ----- Map
 #map {
-  $border-color: #BBB;
   border-top: 1px solid $border-color;
   border-bottom: 1px solid $border-color;
   height: $map-height;
@@ -130,6 +124,16 @@ a {
   }
 }
 
-// ----- Controls
-#controls {
+// ----- Timeline
+#timeline {
+  height: 75px;
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: 1px solid $border-color;
 }
+
+#timeline line {
+  stroke: $font-color;
+  shape-rendering: crispEdges;
+}
+

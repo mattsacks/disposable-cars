@@ -19,6 +19,7 @@ var init = function() {
 
   // create the graph
   graph = new Graph;
+  graph.drawTimeline();
   graph.startDrawing();
 }
 

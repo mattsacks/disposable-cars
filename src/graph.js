@@ -43,6 +43,78 @@ Graph.prototype.gather = function() {
   this.timeline = d3.select('#timeline');
 };
 
+// draws the axis and ticks under the map
+Graph.prototype.drawTimeline = function() {
+  // clear any ticks previously drawn
+  this.timeline.select('tick-container').remove();
+
+  // get attributes from the #timeline element
+  var element = this.timeline.node();
+  var height = element.clientHeight;
+  var width = element.clientWidth;
+
+  // start and ending times
+  var start = +new Date(this.start);
+  var end = +Date.nowsTenth;
+
+  var container = this.timeline.append('svg:g')
+    .attr({
+      'class': 'tick-container',
+    })
+
+  // x-coordinate scale for the ticks from the start date to the end
+  // date between 0 and the width found of the #timeline element
+  var scale = d3.scale.linear()
+    .domain([start, end])
+    .range([0, width]);
+
+  // number of ticks we need
+  var ticks = (end - start) / this.interval;
+
+  // iterate from the first interval to the number of ticks found
+  // don't start at 0 to prevent drawing a tick on the left side of the page
+  for (var i = 1; i < ticks; i++) {
+    var attrs = {};
+
+    // small tick = every % 6 (1 hour)
+    // big tick = every % 36 (6 hours)
+    // divider = every day % 144 (24 hours)
+    if (i % 144 == 0) {
+      attrs = {
+        'class': 'divider',
+        'y1': height - 40
+      };
+    }
+    else if (i % 36 == 0) {
+      attrs = {
+        'class': 'big-tick',
+        'y1': height - 25
+      };
+    }
+    else if (i % 6 == 0) {
+      attrs = {
+        'class': 'small-tick',
+        'y1': height - 15
+      }
+    }
+
+    // if we found an interval for the tick
+    if (attrs.y1 != null) {
+      // get the x-coordinate from the tick scale
+      var x = scale(start + (i * this.interval));
+
+      // append a tick mark
+      container.append('svg:line')
+        .attr(attrs)
+        .attr({
+          'y2': height,
+          'x1': x,
+          'x2': x
+        })
+    }
+  }
+};
+
 Graph.prototype.startDrawing = function(start, speed) {
   var thiz = this;
   this.timestamp = start || this.timestamp;
