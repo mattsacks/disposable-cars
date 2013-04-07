@@ -10,6 +10,9 @@ var Graph = function() {
   // the timestamp intervals in ms being tracked
   this.interval = 600000; // 10 minutes
 
+  // the interval to update the graph with
+  this.speed = 75;
+
   // the start of it
   this.start = new Date().clearTime().decrement('day', this.nDays);
   this.timestamp = +this.start;
@@ -40,9 +43,10 @@ Graph.prototype.gather = function() {
   this.timeline = d3.select('#timeline');
 };
 
-Graph.prototype.startDrawing = function(start) {
+Graph.prototype.startDrawing = function(start, speed) {
   var thiz = this;
   this.timestamp = start || this.timestamp;
+  speed = speed || this.speed;
 
   // draw all cars hidden to start
   this.circles = this.svg.selectAll('.car')
@@ -68,7 +72,7 @@ Graph.prototype.startDrawing = function(start) {
       thiz.time.text(thiz.timeFormat(new Date(thiz.timestamp)));
 
       thiz.timestamp += thiz.interval;
-      setTimeout(update, 75);
+      setTimeout(update, speed);
     }
   };
 
