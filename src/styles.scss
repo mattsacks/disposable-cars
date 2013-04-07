@@ -129,7 +129,12 @@ a {
   height: 75px;
   margin: 0 auto;
   width: 100%;
-  border-bottom: 1px solid $border-color;
+  // border-bottom: 1px solid $border-color;
+
+  .time-marker {
+    stroke: #ba4537;
+    stroke-width: 2px;
+  }
 }
 
 #timeline line {

@@ -62,11 +62,20 @@ Graph.prototype.drawTimeline = function() {
       'class': 'tick-container',
     })
 
+  // draw a timeline marker
+  var marker = this.timeline.append('svg:line')
+    .attr({
+      'class': 'time-marker',
+      'y1': height - 20,
+      'y2': height
+    });
+
   // x-coordinate scale for the ticks from the start date to the end
   // date between 0 and the width found of the #timeline element
   var scale = d3.scale.linear()
     .domain([start, end])
     .range([0, width]);
+  this.tickScale = scale; // cache for the timeline marker
 
   // number of ticks we need
   var ticks = (end - start) / this.interval;
@@ -115,13 +124,16 @@ Graph.prototype.drawTimeline = function() {
   }
 };
 
-Graph.prototype.startDrawing = function(start, speed) {
+Graph.prototype.animate = function(start, speed) {
   var thiz = this;
   this.timestamp = start || this.timestamp;
   speed = speed || this.speed;
 
+  // cache the timeline marker
+  var marker = this.timeline.select('.time-marker');
+
   // draw all cars hidden to start
-  this.circles = this.svg.selectAll('.car')
+  this.circles = this.circles || this.svg.selectAll('.car')
     .data(this.ids)
     .enter()
     .append('svg:circle')
@@ -134,15 +146,27 @@ Graph.prototype.startDrawing = function(start, speed) {
     });
 
   var update = function() {
-    if (thiz.timestamp <= +Date.nowsTenth) {
+    // only call the update loop when we're not told to stop updating and the
+    // timestamp doesn't exceed right now's 10th-minute interval
+    if (thiz.stopUpdating != true && thiz.timestamp <= +Date.nowsTenth) {
+      // redraw all the cars with the current timestamp
       thiz.updateCars(thiz.timestamp);
 
       // update mapreduce stats
       thiz.data = thiz.calculate();
 
+      // update text stats
       // thiz.count.text(thiz.data.numCars + ' cars available');
       thiz.time.text(thiz.timeFormat(new Date(thiz.timestamp)));
 
+      // update the position of the timeline marker
+      var markerx = thiz.tickScale(thiz.timestamp);
+      marker.attr({
+        'x1': markerx,
+        'x2': markerx
+      });
+
+      // update the timestamp and loop!
       thiz.timestamp += thiz.interval;
       setTimeout(update, speed);
     }
@@ -151,6 +175,7 @@ Graph.prototype.startDrawing = function(start, speed) {
   update();
 };
 
+// updates the car positions according to the given timestamp
 Graph.prototype.updateCars = function(timestamp) {
   var thiz = this;
   timestamp = timestamp || +this.ago;
@@ -193,6 +218,7 @@ Graph.prototype.calculate = function(data, stats) {
   return mapreduce(data, stats.mappings, stats.reductions);
 };
 
+// a schema to mapreduce the dataset on
 Graph.prototype.defineStats = function() {
   var thiz = this;
 

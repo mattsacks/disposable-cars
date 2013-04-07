@@ -20,7 +20,7 @@ var init = function() {
   // create the graph
   graph = new Graph;
   graph.drawTimeline();
-  graph.startDrawing();
+  graph.animate();
 }
 
 // when we're ready
