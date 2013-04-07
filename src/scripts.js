@@ -3,9 +3,6 @@ var init = function() {
   // calculate the data
   data = reduce(cars, mappings, reductions);
 
-  // create a day picker and render it
-  dayPicker = new DayPicker().render();
-
   // create map
   layer = mapbox.layer().id('mattsacks.map-pnviow60');
   // disable panning + zooming

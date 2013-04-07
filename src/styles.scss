@@ -77,26 +77,3 @@ a {
   position: relative;
   width: 100%;
 }
-
-// ----- DayPicker
-.days {
-  margin: 20px auto;
-  width: 800px;
-
-  @include small {
-    width: 100%;
-  }
-}
-.day {
-  @include font-serif;
-  text-align: center;
-  width: 20%;
-
-  @include mobile {
-    font-size: 13px;
-  }
-
-  &.active {
-    border-bottom: 1px solid $font-color;
-  }
-}

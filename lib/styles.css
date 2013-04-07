@@ -47,21 +47,3 @@ a {
   height: 600px;
   position: relative;
   width: 100%; }
-
-.days {
-  margin: 20px auto;
-  width: 800px; }
-  @media (max-width: 800px) {
-    .days {
-      width: 100%; } }
-
-.day {
-  font-family: "Merriweather", "Times New Roman", serif;
-  font-weight: 400;
-  text-align: center;
-  width: 20%; }
-  @media (max-width: 500px) {
-    .day {
-      font-size: 13px; } }
-  .day.active {
-    border-bottom: 1px solid #555555; }
