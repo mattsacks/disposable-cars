@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
-@import url(http://fonts.googleapis.com/css?family=Merriweather:700);
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400);
 html, body {
   height: 100%;
   margin: 0;
@@ -9,19 +9,21 @@ a {
   text-decoration: none; }
 
 body {
-  background-color: #f0f0ee; }
+  background-color: #f0f0ee;
+  color: #555555; }
 
 h1 {
   font-family: "Permanent Marker";
   font-weight: 400;
-  color: #555;
   font-size: 65px;
   margin: 5px 0; }
+  @media (max-width: 500px) {
+    h1 {
+      font-size: 45px; } }
 
 h2 {
   font-family: "Permanent Marker";
   font-weight: 400;
-  color: #555;
   font-size: 25px;
   margin: 0; }
 
@@ -45,3 +47,21 @@ a {
   height: 600px;
   position: relative;
   width: 100%; }
+
+.days {
+  margin: 20px auto;
+  width: 800px; }
+  @media (max-width: 800px) {
+    .days {
+      width: 100%; } }
+
+.day {
+  font-family: "Merriweather", "Times New Roman", serif;
+  font-weight: 400;
+  text-align: center;
+  width: 20%; }
+  @media (max-width: 500px) {
+    .day {
+      font-size: 13px; } }
+  .day.active {
+    border-bottom: 1px solid #555555; }

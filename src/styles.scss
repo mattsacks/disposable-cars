@@ -2,14 +2,20 @@
 
 // ----- Fonts
 @import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
-@import url(http://fonts.googleapis.com/css?family=Merriweather:700);
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400);
 
 // ----- Colors
 $link-color: #3589ac;
+$font-color: #555;
 
 // ----- Font Families
 @mixin font-marker {
   font-family: "Permanent Marker";
+  font-weight: 400;
+}
+
+@mixin font-serif {
+  font-family: "Merriweather", "Times New Roman", serif;
   font-weight: 400;
 }
 
@@ -27,22 +33,23 @@ a {
 // ----- Body
 body {
   background-color: #f0f0ee;
+  color: $font-color;
 }
 
 // ----- Headings
 h1 {
   @include font-marker;
-  color: #555;
   font-size: 65px;
   margin: 5px 0;
+
+  @include mobile {
+    font-size: 45px;
+  }
 }
 
 h2 {
   @include font-marker;
-  color: #555;
   font-size: 25px;
-  // font-family: "Merriweather";
-  // font-weight: 700;
   margin: 0;
 }
 
@@ -69,4 +76,27 @@ a {
   height: 600px;
   position: relative;
   width: 100%;
+}
+
+// ----- DayPicker
+.days {
+  margin: 20px auto;
+  width: 800px;
+
+  @include small {
+    width: 100%;
+  }
+}
+.day {
+  @include font-serif;
+  text-align: center;
+  width: 20%;
+
+  @include mobile {
+    font-size: 13px;
+  }
+
+  &.active {
+    border-bottom: 1px solid $font-color;
+  }
 }

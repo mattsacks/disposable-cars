@@ -17,3 +17,15 @@
 @mixin transition($transition) {
   @include experimental(transition, $transition);
 }
+
+// ----- Media Queries
+@mixin small($width: 800px) {
+  @media(screen and max-width: $width) {
+    @content;
+  }
+}
+@mixin mobile($width: 500px) {
+  @media(screen and max-width: $width) {
+    @content;
+  }
+}
