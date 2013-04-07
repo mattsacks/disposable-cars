@@ -1,55 +1,74 @@
 // constructor
 var Graph = function() {
   // car data and each individual car2go found in portland by license
-  this.data = window.cars;
-  this.cars = Object.keys(this.data);
+  this.cars = window.cars;
+  this.ids = Object.keys(this.cars);
 
   // the number of days tracked
-  this.nDays = 5;
+  this.nDays = window.data.numDays;
 
   // the timestamp intervals in ms being tracked
   this.interval = 600000; // 10 minutes
 
   // the start of it
-  this.ago = new Date().clearTime().decrement('day', this.nDays);
+  this.start = new Date().clearTime().decrement('day', this.nDays);
+  this.timestamp = +this.start;
 
+  // get elements
+  this.gather();
+
+  // get configuration for mapreduce and calculate
+  this.stats = this.defineStats();
+};
+
+// gather elements & element-related functions
+Graph.prototype.gather = function() {
   // parent element
   this.container = d3.select('#map');
   // create an svg element
-  this.svg = this.container.append('svg').attr('id', 'map-graph');
+  this.svg = this.svg ||
+    this.container.append('svg').attr('id', 'map-graph');
+
+  // the count text
+  this.count = d3.select('#count');
+
   // the time element
   this.time = d3.select('#time');
   // format as "{day of week} at {24hour:minute} {AM/PM}"
-  this.timeFormat = d3.time.format('%A at %H:%M %p');
-
-  this.timeline = d3.select('#map');
+  this.timeFormat = d3.time.format('%A at %H:%M');
+  // timeline element
+  this.timeline = d3.select('#timeline');
 };
 
 Graph.prototype.startDrawing = function(start) {
   var thiz = this;
-  start = start || +new Date(this.ago);
+  this.timestamp = start || this.timestamp;
 
   // draw all cars hidden to start
   this.circles = this.svg.selectAll('.car')
-    .data(this.cars)
+    .data(this.ids)
     .enter()
     .append('svg:circle')
     .attr({
       'class': 'car hide',
-      'r': 3.5,
+      'r': 4,
+      'data-id': function(car) {
+        return car;
+      }
     });
 
   var update = function() {
-    if (start < +Date.nowsTenth) {
-      thiz.updateCars(start);
-      thiz.time.text(thiz.timeFormat(new Date(start)));
+    if (thiz.timestamp <= +Date.nowsTenth) {
+      thiz.updateCars(thiz.timestamp);
 
-      var shownCars = thiz.circles.filter(function() {
-        return !d3.select(this).classed('hide');
-      });
+      // update mapreduce stats
+      thiz.data = thiz.calculate();
 
-      start += thiz.interval;
-      // setTimeout(update, 75);
+      // thiz.count.text(thiz.data.numCars + ' cars available');
+      thiz.time.text(thiz.timeFormat(new Date(thiz.timestamp)));
+
+      thiz.timestamp += thiz.interval;
+      setTimeout(update, 75);
     }
   };
 
@@ -60,8 +79,9 @@ Graph.prototype.updateCars = function(timestamp) {
   var thiz = this;
   timestamp = timestamp || +this.ago;
 
+  // updates an individual car by it's id
   var update = function(car) {
-    var location = thiz.data[car][timestamp];
+    var location = thiz.cars[car][timestamp];
     var noLocation = location == null;
     var circle = d3.select(this);
 
@@ -87,17 +107,36 @@ Graph.prototype.getCoords = function(location) {
   return window.map.locationPoint(coords);
 };
 
-Graph.prototype.getIntervals = function() {
-  // today at it's 10-minute interval
-  var today = Date.nowsTenth();
+// calculations on data
+Graph.prototype.calculate = function(data, stats) {
+  // default object of data to mapreduce on
+  data = data || this.cars;
+  // default stats object with mappings and reductions keys 
+  stats = stats || this.stats || this.defineStats();
 
-  // starting at midnight nDays ago
-  var ago = new Date().clearTime().decrement('day', this.nDays);
-  var intervals = [];
-  var diff = (+today - +ago) / this.interval;
-
-  // starting from this.nDays ago, increase i until it no longer exists
-  for (var i = +ago, max = +today; i < max; i += this.interval) {
-    intervals.push(i);
-  }
+  return mapreduce(data, stats.mappings, stats.reductions);
 };
+
+Graph.prototype.defineStats = function() {
+  var thiz = this;
+
+  return {
+    mappings: {
+      // boolean value if there was a location found for the current
+      // configured timestamp
+      numCars: function(car) {
+        return car[thiz.timestamp] != null;
+      }
+    },
+
+    reductions: {
+      // return a count for the number of cars found with a location
+      // at the current timestamp
+      numCars: function(sum, haslocation) {
+        sum = sum || 0;
+        if (haslocation) sum += 1;
+        return sum;
+      }
+    }
+  }
+}
