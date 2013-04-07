@@ -2,7 +2,8 @@
 
 // ----- Fonts
 @import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
-@import url(http://fonts.googleapis.com/css?family=Merriweather:400);
+@import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
+// @import url(http://fonts.googleapis.com/css?family=Merriweather);
 
 // ----- Colors
 $link-color: #3589ac;
@@ -14,8 +15,8 @@ $font-color: #555;
   font-weight: 400;
 }
 
-@mixin font-serif {
-  font-family: "Merriweather", "Times New Roman", serif;
+@mixin font-time {
+  font-family: "Shadows Into Light Two";
   font-weight: 400;
 }
 
@@ -73,7 +74,28 @@ a {
 // ----- Map
 #map {
   margin: 20px 0;
-  height: 600px;
+  height: 700px;
   position: relative;
   width: 100%;
+}
+
+// ----- Controls
+#controls {
+}
+
+// ----- Time 
+#time {
+  @include font-time;
+  font-size: 40px;
+  vertical-align: top;
+  position: relative;
+  top: -85px;
+  margin-left: 20px;
+}
+
+// ----- Timeline
+#timeline {
+  height: 100px;
+  margin: 0 auto;
+  width: 80%;
 }
