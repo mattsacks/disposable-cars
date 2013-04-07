@@ -1,7 +1,8 @@
 // yes I use global references
+// deal with it
 var init = function() {
   // calculate the data
-  data = reduce(cars, mappings, reductions);
+  data = calculate();
 
   // create map
   layer = mapbox.layer().id('mattsacks.map-pnviow60');
