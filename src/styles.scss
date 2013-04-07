@@ -20,6 +20,9 @@ $font-color: #555;
   font-weight: 400;
 }
 
+// ----- Values
+$map-height: 700px;
+
 // ----- Reset
 html, body {
   height: 100%;
@@ -73,10 +76,25 @@ a {
 
 // ----- Map
 #map {
-  margin: 20px 0;
-  height: 700px;
+  $border-color: #BBB;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  height: $map-height;
+}
+
+// ----- Map Graph
+#map-graph {
+  height: $map-height;
   position: relative;
   width: 100%;
+}
+
+.car {
+  fill: #74b6d9;
+
+  &.hide {
+    display: none;
+  }
 }
 
 // ----- Controls

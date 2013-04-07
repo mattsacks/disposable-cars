@@ -43,10 +43,19 @@ a {
     color: #3180a0; }
 
 #map {
-  margin: 20px 0;
+  border-top: 1px solid #bbbbbb;
+  border-bottom: 1px solid #bbbbbb;
+  height: 700px; }
+
+#map-graph {
   height: 700px;
   position: relative;
   width: 100%; }
+
+.car {
+  fill: #74b6d9; }
+  .car.hide {
+    display: none; }
 
 #time {
   font-family: "Shadows Into Light Two";

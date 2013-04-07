@@ -15,6 +15,10 @@ var init = function() {
     lat: map.lat,
     lon: map.lon
   }, 13);
+
+  // create the graph
+  graph = new Graph;
+  graph.startDrawing();
 }
 
 // when we're ready
