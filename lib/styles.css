@@ -42,6 +42,31 @@ a {
   a:hover {
     color: #3180a0; }
 
+.stats-container {
+  position: absolute;
+  top: 110px;
+  z-index: 2;
+  width: 100%; }
+
+.stat {
+  font-family: "Shadows Into Light Two";
+  font-weight: 400;
+  font-size: 40px;
+  vertical-align: top; }
+
+#time {
+  position: absolute;
+  left: 20px; }
+
+#count {
+  position: absolute;
+  right: 20px; }
+
+#timeline {
+  height: 100px;
+  margin: 0 auto;
+  width: 80%; }
+
 #map {
   border-top: 1px solid #bbbbbb;
   border-bottom: 1px solid #bbbbbb;
@@ -53,20 +78,9 @@ a {
   width: 100%; }
 
 .car {
-  fill: #74b6d9; }
+  fill: #74b6d9;
+  stroke: white;
+  stroke-opacity: 0.5;
+  stroke-width: 1px; }
   .car.hide {
     display: none; }
-
-#time {
-  font-family: "Shadows Into Light Two";
-  font-weight: 400;
-  font-size: 40px;
-  vertical-align: top;
-  position: relative;
-  top: -85px;
-  margin-left: 20px; }
-
-#timeline {
-  height: 100px;
-  margin: 0 auto;
-  width: 80%; }

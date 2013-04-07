@@ -15,7 +15,7 @@ $font-color: #555;
   font-weight: 400;
 }
 
-@mixin font-time {
+@mixin font-stat {
   font-family: "Shadows Into Light Two";
   font-weight: 400;
 }
@@ -74,6 +74,36 @@ a {
   }
 }
 
+// --------------------
+// ----- Stats Headings
+.stats-container {
+  position: absolute;
+  top: 110px;
+  z-index: 2;
+  width: 100%;
+}
+.stat {
+  @include font-stat;
+  font-size: 40px;
+  vertical-align: top;
+}
+// ----- Time 
+#time {
+  position: absolute;
+  left: 20px;
+}
+#count {
+  position: absolute;
+  right: 20px;
+}
+
+// ----- Timeline
+#timeline {
+  height: 100px;
+  margin: 0 auto;
+  width: 80%;
+}
+
 // ----- Map
 #map {
   $border-color: #BBB;
@@ -91,6 +121,9 @@ a {
 
 .car {
   fill: #74b6d9;
+  stroke: white;
+  stroke-opacity: 0.5;
+  stroke-width: 1px;
 
   &.hide {
     display: none;
@@ -99,21 +132,4 @@ a {
 
 // ----- Controls
 #controls {
-}
-
-// ----- Time 
-#time {
-  @include font-time;
-  font-size: 40px;
-  vertical-align: top;
-  position: relative;
-  top: -85px;
-  margin-left: 20px;
-}
-
-// ----- Timeline
-#timeline {
-  height: 100px;
-  margin: 0 auto;
-  width: 80%;
 }
