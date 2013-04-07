@@ -11,7 +11,7 @@ var Graph = function() {
   this.interval = 600000; // 10 minutes
 
   // the interval to update the graph with
-  this.speed = 75;
+  this.speed = 125;
 
   // the start of it
   this.start = new Date().clearTime().decrement('day', this.nDays);
@@ -161,7 +161,7 @@ Graph.prototype.animate = function(start, speed) {
 
       // update the position of the timeline marker
       var markerx = thiz.tickScale(thiz.timestamp);
-      marker.attr({
+      marker.transition().duration(speed).attr({
         'x1': markerx,
         'x2': markerx
       });
@@ -190,7 +190,7 @@ Graph.prototype.updateCars = function(timestamp) {
     if (noLocation) return;
 
     var coords = thiz.getCoords(location);
-    circle.attr({
+    circle.transition().duration(thiz.speed).attr({
       cx: coords.x,
       cy: coords.y
     });
