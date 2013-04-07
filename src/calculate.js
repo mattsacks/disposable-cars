@@ -1,5 +1,5 @@
 // taken from Collector.js
-var reduce = function(data, mappings, reductions) {
+var mapreduce = function(data, mappings, reductions) {
   // the returned object
   var collection = {};
 
@@ -44,7 +44,7 @@ var mappings = {
     var first = new Date(+timestamps[0]).clearTime();
     var last = new Date(+timestamps.last()).clearTime();
     return (last - first) / Date.day;
-  },
+  }
 };
 
 var reductions = {
@@ -53,4 +53,8 @@ var reductions = {
     if (delta > cur) cur = delta;
     return cur;
   }
+};
+
+var calculate = function() {
+  return mapreduce(cars, mappings, reductions);
 };
