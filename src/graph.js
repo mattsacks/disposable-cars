@@ -145,6 +145,57 @@ Graph.prototype.drawTimeline = function() {
   }
 };
 
+// draws the path element in the timeline
+Graph.prototype.drawTimepath = function() {
+  var thiz = this;
+  var height = this.timeline.node().clientHeight;
+
+  // yscale from 0 number cars found to the max num of cars is the
+  // total number found in the dataset
+  var yscale = d3.scale.linear()
+    .domain([0, this.ids.length])
+    .range([height, height/3]);
+
+  // path function
+  var path = d3.svg.line()
+    .x(this.xscale)
+    .y(function(d) {
+      thiz.timestamp = d;
+      return yscale(thiz.calculate().numCars);
+    });
+
+  // area function
+  var area = d3.svg.area()
+    .x(this.xscale)
+    .y0(height)
+    .y1(function(d) {
+      thiz.timestamp = d;
+      return yscale(thiz.calculate().numCars);
+    });
+
+  // generate a range of time intervals between the start and end
+  var start = +new Date(this.start);
+  var end = +new Date(Date.nowsTenth);
+  var timestamps = d3.range(start, end, this.interval);
+
+  var generatePath = function(className, dFunction) {
+    return thiz.timeline.selectAll('path.' + className)
+      .data([timestamps])
+      .enter()
+      .append('svg:path')
+      .attr({
+        'class': className,
+        'd': dFunction
+      });
+  };
+
+  generatePath('count-area', area);
+  // generatePath('count-path', path);
+
+  // reset timestamp to beginning
+  this.timestamp = +start;
+};
+
 Graph.prototype.animate = function(start, speed) {
   var thiz = this;
   // clear any existing animation loop
