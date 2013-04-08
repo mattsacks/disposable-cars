@@ -34,7 +34,7 @@ Date.prototype.decrement = function(range, amount) {
 
 // get a date at it's 10th minute interval
 Date.prototype.getTenth = function() {
-  var interval = Math.floor(new Date().getMinutes() / 10);
+  var interval = Math.floor(this.getMinutes() / 10);
   var clone = new Date(this);
   clone.setMilliseconds(0);
   clone.setSeconds(0);
@@ -60,7 +60,6 @@ var render = function(element, template, data, partials) {
   element.innerHTML = template(data, partials);
   return element;
 };
-
 
 // throttles a function, from underscore.js
 var throttle = function(func, wait) {
