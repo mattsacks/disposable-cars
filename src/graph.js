@@ -64,12 +64,12 @@ Graph.prototype.attach = function() {
     var timestamp = thiz.xscale.invert(x);
     thiz.timestamp = +new Date(timestamp).getTenth();
 
-    thiz.animate(thiz.timestamp);
-    thiz.stopUpdating = true;
-  }, 10));
+    thiz.stopAnimating = true;
+    thiz.update(thiz.timestamp);
+  }, 15));
 
-  timeline.addEventListener('mouseout', function() {
-    thiz.stopUpdating = false;
+  this.container.node().addEventListener('mouseover', function() {
+    thiz.stopAnimating = false;
     thiz.animate();
   });
 };
@@ -147,11 +147,12 @@ Graph.prototype.drawTimeline = function() {
 
 Graph.prototype.animate = function(start, speed) {
   var thiz = this;
+  // clear any existing animation loop
+  if (this['animation'] != null)
+    this.animation = clearTimeout(this.animation);
+
   this.timestamp = start || this.timestamp;
   speed = speed || this.speed;
-
-  // cache the timeline marker
-  var marker = this.timeline.select('.time-marker');
 
   // draw all cars hidden to start
   this.circles = this.circles || this.svg.selectAll('.car')
@@ -166,43 +167,52 @@ Graph.prototype.animate = function(start, speed) {
       }
     });
 
-  var update = function() {
-    // only call the update loop when we're not told to stop updating and the
-    // timestamp doesn't exceed right now's 10th-minute interval
-    if (thiz.timestamp <= +Date.nowsTenth) {
-      // redraw all the cars with the current timestamp
-      thiz.updateCars(thiz.timestamp);
+  // set a timeout that can be cleared if this is being called again
+  var loop = function() {
+    thiz.update(thiz.timestamp, speed);
+    thiz.timestamp += thiz.interval;
 
-      // update mapreduce stats
-      thiz.data = thiz.calculate();
-
-      // update text stats
-      // thiz.count.text(thiz.data.numCars + ' cars available');
-      thiz.time.text(thiz.timeFormat(new Date(thiz.timestamp)));
-
-      // update the position of the timeline marker
-      var markerx = thiz.scale(thiz.timestamp);
-
-      // only animate when we're not updating
-      var m = thiz.stopUpdating ?
-        marker : marker.transition().duration(speed).ease('linear');
-
-      m.attr({
-        'x1': markerx,
-        'x2': markerx
-      });
-
-      // update the timestamp and loop!
-      thiz.timestamp += thiz.interval;
-
-      // loop unless set not to
-      if (thiz.stopUpdating != true)
-        setTimeout(update, speed);
-    }
+    thiz.animation = thiz.stopAnimating == true ?
+      // set the animation to undefined if told to stop udating
+      clearTimeout(thiz.animation) :
+      // otherwise, keep animating
+      setTimeout(loop, speed);
   };
-
-  update();
+  loop();
 };
+
+// update the graph components and car positions
+Graph.prototype.update = function(timestamp, speed) {
+  timestamp = timestamp || this.timestamp;
+  speed = speed || this.speed; // FIXME for 0
+
+  var marker = this.timeline.select('.time-marker');
+
+  // don't try to update if we're at a time beyond what we'll have data for
+  if (timestamp > +Date.nowsTenth) return;
+
+  // redraw all the cars with the current timestamp
+  this.updateCars(timestamp);
+
+  // update mapreduce stats
+  this.data = this.calculate();
+
+  // update text stats
+  // this.count.text(this.data.numCars + ' cars available');
+  this.time.text(this.timeFormat(new Date(timestamp)));
+
+  // update the position of the timeline marker
+  var x = this.xscale(timestamp);
+
+  // only animate when we're not updating FIXME
+  var m = this.stopAnimating ?
+    marker : marker.transition().duration(speed).ease('linear');
+
+  m.attr({
+    'x1': x,
+    'x2': x
+  });
+}
 
 // updates the car positions according to the given timestamp
 Graph.prototype.updateCars = function(timestamp) {
@@ -220,8 +230,10 @@ Graph.prototype.updateCars = function(timestamp) {
 
     var coords = thiz.getCoords(location);
 
-    var speed = thiz.stopUpdating ? 20 : thiz.speed;
-    circle.transition().duration(speed).attr({
+    var c = thiz.stopAnimating ? circle :
+      circle.transition().duration(thiz.speed);
+
+    c.attr({
       cx: coords.x,
       cy: coords.y
     });
