@@ -19,6 +19,8 @@ var Graph = function() {
 
   // get elements
   this.gather();
+  // attach to elements
+  this.attach();
 
   // get configuration for mapreduce and calculate
   this.stats = this.defineStats();
@@ -41,6 +43,26 @@ Graph.prototype.gather = function() {
   this.timeFormat = d3.time.format('%A at %H:%M');
   // timeline element
   this.timeline = d3.select('#timeline');
+};
+
+// attach events to handlers
+Graph.prototype.attach = function() {
+  var thiz = this;
+  var timeline = this.timeline.node();
+
+  timeline.addEventListener('mousemove', throttle(function(e) {
+    var x = e.offsetX;
+    var timestamp = thiz.scale.invert(e.x);
+    thiz.timestamp = +new Date(timestamp).getTenth();
+
+    thiz.animate(thiz.timestamp);
+    thiz.stopUpdating = true;
+  }, 10));
+
+  timeline.addEventListener('mouseout', function() {
+    thiz.stopUpdating = false;
+    thiz.animate();
+  });
 };
 
 // draws the axis and ticks under the map
@@ -75,7 +97,7 @@ Graph.prototype.drawTimeline = function() {
   var scale = d3.scale.linear()
     .domain([start, end])
     .range([0, width]);
-  this.tickScale = scale; // cache for the timeline marker
+  this.scale = scale; // cache dat
 
   // number of ticks we need
   var ticks = (end - start) / this.interval;
@@ -148,7 +170,7 @@ Graph.prototype.animate = function(start, speed) {
   var update = function() {
     // only call the update loop when we're not told to stop updating and the
     // timestamp doesn't exceed right now's 10th-minute interval
-    if (thiz.stopUpdating != true && thiz.timestamp <= +Date.nowsTenth) {
+    if (thiz.timestamp <= +Date.nowsTenth) {
       // redraw all the cars with the current timestamp
       thiz.updateCars(thiz.timestamp);
 
@@ -160,15 +182,23 @@ Graph.prototype.animate = function(start, speed) {
       thiz.time.text(thiz.timeFormat(new Date(thiz.timestamp)));
 
       // update the position of the timeline marker
-      var markerx = thiz.tickScale(thiz.timestamp);
-      marker.transition().duration(speed).attr({
+      var markerx = thiz.scale(thiz.timestamp);
+
+      // only animate when we're not updating
+      var m = thiz.stopUpdating ?
+        marker : marker.transition().duration(speed).ease('linear');
+
+      m.attr({
         'x1': markerx,
         'x2': markerx
       });
 
       // update the timestamp and loop!
       thiz.timestamp += thiz.interval;
-      setTimeout(update, speed);
+
+      // loop unless set not to
+      if (thiz.stopUpdating != true)
+        setTimeout(update, speed);
     }
   };
 
@@ -190,7 +220,9 @@ Graph.prototype.updateCars = function(timestamp) {
     if (noLocation) return;
 
     var coords = thiz.getCoords(location);
-    circle.transition().duration(thiz.speed).attr({
+
+    var speed = thiz.stopUpdating ? 20 : thiz.speed;
+    circle.transition().duration(speed).attr({
       cx: coords.x,
       cy: coords.y
     });

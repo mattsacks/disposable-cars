@@ -32,15 +32,21 @@ Date.prototype.decrement = function(range, amount) {
   return new Date(this.setTime(+this - change));
 };
 
+// get a date at it's 10th minute interval
+Date.prototype.getTenth = function() {
+  var interval = Math.floor(new Date().getMinutes() / 10);
+  var clone = new Date(this);
+  clone.setMilliseconds(0);
+  clone.setSeconds(0);
+  clone.setMinutes(10 * interval);
+  return clone;
+};
+
 // single-purpose utility of today's nth interval in 10-minutes
 Date.nowsTenth = (function() {
-  var interval = Math.floor(new Date().getMinutes() / 10);
-  var today = new Date();
-  today.setMilliseconds(0);
-  today.setSeconds(0);
-  today.setMinutes(10 * interval);
-  return today;
+  return new Date().getTenth();
 })();
+
 
 // return a Mustache function of the a template element's innerHTML
 var getTemplate = function(id) {
@@ -55,3 +61,29 @@ var render = function(element, template, data, partials) {
   return element;
 };
 
+
+// throttles a function, from underscore.js
+var throttle = function(func, wait) {
+  var context, args, timeout, result;
+  var previous = 0;
+  var later = function() {
+    previous = new Date;
+    timeout = null;
+    result = func.apply(context, args);
+  };
+  return function() {
+    var now = new Date;
+    var remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+    if (remaining <= 0) {
+      clearTimeout(timeout);
+      timeout = null;
+      previous = now;
+      result = func.apply(context, args);
+    } else if (!timeout) {
+      timeout = setTimeout(later, remaining);
+    }
+    return result;
+  };
+};
