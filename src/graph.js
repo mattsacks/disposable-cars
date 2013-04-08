@@ -11,7 +11,7 @@ var Graph = function() {
   this.interval = 600000; // 10 minutes
 
   // the interval to update the graph with
-  this.speed = 125;
+  this.speed = 200;
 
   // the start of it
   this.start = new Date().clearTime().decrement('day', this.nDays);
@@ -112,19 +112,19 @@ Graph.prototype.drawTimeline = function() {
     if (i % 144 == 0) {
       attrs = {
         'class': 'divider',
-        'y1': height - 40
+        'y1': height - 30
       };
     }
     else if (i % 36 == 0) {
       attrs = {
         'class': 'big-tick',
-        'y1': height - 25
+        'y1': height - 15
       };
     }
     else if (i % 6 == 0) {
       attrs = {
         'class': 'small-tick',
-        'y1': height - 15
+        'y1': height - 5
       }
     }
 
@@ -154,7 +154,7 @@ Graph.prototype.drawTimepath = function() {
   // total number found in the dataset
   var yscale = d3.scale.linear()
     .domain([0, this.ids.length])
-    .range([height, height/3]);
+    .range([height, height/4]);
 
   // path function
   var path = d3.svg.line()
