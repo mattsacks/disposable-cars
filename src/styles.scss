@@ -6,9 +6,20 @@
 // @import url(http://fonts.googleapis.com/css?family=Merriweather);
 
 // ----- Colors
+$bg-color: #f0f0ee;
 $link-color: #3589ac;
 $font-color: #555;
 $border-color: #BBB;
+
+// ---- styles
+%boxed-stat {
+  background-color: #FAFAFA;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+  box-shadow: inset 0 1px 0 white, 0 1px 2px rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 0 white;
+  padding: 3px 8px;
+}
 
 // ----- Font Families
 @mixin font-marker {
@@ -37,7 +48,7 @@ a {
 
 // ----- Body
 body {
-  background-color: #f0f0ee;
+  background-color: $bg-color;
   color: $font-color;
 }
 
@@ -46,6 +57,7 @@ h1 {
   @include font-marker;
   font-size: 62px;
   margin: 5px 0;
+  text-shadow: 0 1px 0 white;
 
   @include mobile {
     font-size: 45px;
@@ -80,13 +92,14 @@ a {
 // ----- Stats Headings
 .stats-container {
   position: absolute;
-  top: 105px;
+  top: 110px;
   z-index: 2;
   width: 100%;
 }
 .stat {
-  @include font-cute;
-  font-size: 40px;
+  @include font-bold;
+  @extend %boxed-stat;
+  font-size: 30px;
   vertical-align: top;
 }
 // ----- Time 
@@ -126,29 +139,31 @@ a {
 
 // ----- Timeline
 #timeline {
-  height: 75px;
+  height: 50px;
   margin: 0 auto;
   width: 100%;
-  // border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
 
   .time-marker {
     stroke: #ba4537;
-    stroke-width: 2px;
+    stroke-width: 3px;
+    stroke-opacity: 0.8;
   }
 
   .count-path {
-    stroke: $font-color;
+    stroke: $border-color;
     fill: none;
   }
 
   .count-area {
     fill: $font-color;
-    fill-opacity: 0.12;
+    fill-opacity: 0.08;
   }
 }
 
 #timeline line {
   stroke: $font-color;
+  stroke-opacity: 0.8;
   shape-rendering: crispEdges;
 }
 

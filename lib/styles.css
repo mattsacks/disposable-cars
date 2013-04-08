@@ -2,6 +2,14 @@
 @import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
 @import url(http://fonts.googleapis.com/css?family=Lato:700,900);
 @import url(http://fonts.googleapis.com/css?family=Cabin+Condensed:600,700|Cabin:600,700);
+.stat {
+  background-color: #FAFAFA;
+  border-radius: 4px;
+  border: 1px solid #bbbbbb;
+  box-shadow: inset 0 1px 0 white, 0 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 0 white;
+  padding: 3px 8px; }
+
 html, body {
   height: 100%;
   margin: 0;
@@ -18,7 +26,8 @@ h1 {
   font-family: "Permanent Marker";
   font-weight: 400;
   font-size: 62px;
-  margin: 5px 0; }
+  margin: 5px 0;
+  text-shadow: 0 1px 0 white; }
   @media (max-width: 500px) {
     h1 {
       font-size: 45px; } }
@@ -47,14 +56,14 @@ a {
 
 .stats-container {
   position: absolute;
-  top: 105px;
+  top: 110px;
   z-index: 2;
   width: 100%; }
 
 .stat {
-  font-family: "Shadows Into Light Two";
-  font-weight: 400;
-  font-size: 40px;
+  font-family: "Lato";
+  font-weight: 900;
+  font-size: 30px;
   vertical-align: top; }
 
 #time {
@@ -68,10 +77,10 @@ a {
 #map {
   border-top: 1px solid #bbbbbb;
   border-bottom: 1px solid #bbbbbb;
-  height: 625px; }
+  height: 600px; }
 
 #map-graph {
-  height: 625px;
+  height: 600px;
   position: relative;
   width: 100%; }
 
@@ -84,11 +93,22 @@ a {
     display: none; }
 
 #timeline {
-  height: 75px;
+  height: 50px;
   margin: 0 auto;
   width: 100%;
   border-bottom: 1px solid #bbbbbb; }
+  #timeline .time-marker {
+    stroke: #ba4537;
+    stroke-width: 3px;
+    stroke-opacity: 0.8; }
+  #timeline .count-path {
+    stroke: #bbbbbb;
+    fill: none; }
+  #timeline .count-area {
+    fill: #555555;
+    fill-opacity: 0.08; }
 
 #timeline line {
   stroke: #555555;
+  stroke-opacity: 0.8;
   shape-rendering: crispEdges; }
