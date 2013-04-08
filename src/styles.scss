@@ -22,7 +22,7 @@ $border-color: #BBB;
 }
 
 // ----- Values
-$map-height: 625px;
+$map-height: 600px;
 
 // ----- Reset
 html, body {
@@ -135,10 +135,21 @@ a {
     stroke: #ba4537;
     stroke-width: 2px;
   }
+
+  .count-path {
+    stroke: $font-color;
+    fill: none;
+  }
+
+  .count-area {
+    fill: $font-color;
+    fill-opacity: 0.12;
+  }
 }
 
 #timeline line {
   stroke: $font-color;
   shape-rendering: crispEdges;
 }
+
 
