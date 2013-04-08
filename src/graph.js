@@ -43,6 +43,15 @@ Graph.prototype.gather = function() {
   this.timeFormat = d3.time.format('%A at %H:%M');
   // timeline element
   this.timeline = d3.select('#timeline');
+
+  // get an x scale from the starting date to the ending date for the width of
+  // the map
+  var width = this.container.node().clientWidth;
+  var start = +new Date(this.start);
+  var end = +Date.nowsTenth;
+  this.xscale = d3.scale.linear()
+    .domain([start, end])
+    .range([0, width]);
 };
 
 // attach events to handlers
@@ -52,7 +61,7 @@ Graph.prototype.attach = function() {
 
   timeline.addEventListener('mousemove', throttle(function(e) {
     var x = e.offsetX;
-    var timestamp = thiz.scale.invert(e.x);
+    var timestamp = thiz.xscale.invert(x);
     thiz.timestamp = +new Date(timestamp).getTenth();
 
     thiz.animate(thiz.timestamp);
@@ -73,9 +82,6 @@ Graph.prototype.drawTimeline = function() {
   // get attributes from the #timeline element
   var element = this.timeline.node();
   var height = element.clientHeight;
-  var width = element.clientWidth;
-
-  // start and ending times
   var start = +new Date(this.start);
   var end = +Date.nowsTenth;
 
@@ -91,13 +97,6 @@ Graph.prototype.drawTimeline = function() {
       'y1': height - 20,
       'y2': height
     });
-
-  // x-coordinate scale for the ticks from the start date to the end
-  // date between 0 and the width found of the #timeline element
-  var scale = d3.scale.linear()
-    .domain([start, end])
-    .range([0, width]);
-  this.scale = scale; // cache dat
 
   // number of ticks we need
   var ticks = (end - start) / this.interval;
@@ -132,7 +131,7 @@ Graph.prototype.drawTimeline = function() {
     // if we found an interval for the tick
     if (attrs.y1 != null) {
       // get the x-coordinate from the tick scale
-      var x = scale(start + (i * this.interval));
+      var x = this.xscale(start + (i * this.interval));
 
       // append a tick mark
       container.append('svg:line')
