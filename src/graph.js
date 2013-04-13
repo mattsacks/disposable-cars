@@ -153,8 +153,8 @@ Graph.prototype.drawTimepath = function() {
   // yscale from 0 number cars found to the max num of cars is the
   // total number found in the dataset
   var yscale = d3.scale.linear()
-    .domain([0, this.ids.length])
-    .range([height, height/4]);
+    .domain([100, this.ids.length])
+    .range([height, 0]);
 
   // path function
   var path = d3.svg.line()
@@ -212,7 +212,7 @@ Graph.prototype.animate = function(start, speed) {
     .append('svg:circle')
     .attr({
       'class': 'car hide',
-      'r': 4,
+      'r': 5,
       'data-id': function(car) {
         return car;
       }
