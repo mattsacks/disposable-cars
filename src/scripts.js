@@ -3,6 +3,10 @@
 // deal with it
 
 var load = function() {
+  // set the map height to 70% of the window, capped at 800px
+  var height = Math.min(window.innerHeight * .72, 800);
+  document.id('map').style.height = height + 'px';
+
   document.body.classList.remove('hide');
   graph.animate();
   hasLoaded = true;
