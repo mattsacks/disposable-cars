@@ -44,6 +44,12 @@ Graph.prototype.gather = function() {
   // timeline element
   this.timeline = d3.select('#timeline');
 
+  // collect scales
+  this.getScales();
+};
+
+// collect scales based on browser size
+Graph.prototype.getScales = function() {
   // get an x scale from the starting date to the ending date for the width of
   // the map
   var width = this.container.node().clientWidth;
@@ -72,12 +78,19 @@ Graph.prototype.attach = function() {
     thiz.stopAnimating = false;
     thiz.animate();
   });
+
+  window.addEventListener('resize', throttle(function() {
+    // update the timeline
+    thiz.getScales();
+    thiz.drawTimeline();
+    thiz.drawTimepath();
+  }, 25));
 };
 
 // draws the axis and ticks under the map
 Graph.prototype.drawTimeline = function() {
   // clear any ticks previously drawn
-  this.timeline.select('tick-container').remove();
+  this.timeline.select('.tick-container').remove();
 
   // get attributes from the #timeline element
   var element = this.timeline.node();
@@ -179,6 +192,8 @@ Graph.prototype.drawTimepath = function() {
   var timestamps = d3.range(start, end, this.interval);
 
   var generatePath = function(className, dFunction) {
+    // remove any existing path first
+    thiz.timeline.selectAll('path.' + className).remove();
     return thiz.timeline.selectAll('path.' + className)
       .data([timestamps])
       .enter()
