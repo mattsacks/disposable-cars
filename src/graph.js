@@ -287,22 +287,69 @@ Graph.prototype.updateCars = function(timestamp) {
 
   // updates an individual car by it's id
   var update = function(car) {
-    var location = thiz.cars[car][timestamp];
-    var noLocation = location == null;
+    var loc = thiz.cars[car][timestamp];
     var circle = d3.select(this);
 
-    circle.classed('hide', noLocation);
-    if (noLocation) return;
+    // the car doesn't have a location for the timestamp
+    if (loc == null) {
+      // if we're not animating and the car doesn't have a location, hide it
+      if (thiz.stopAnimating == true) {
+        circle
+          .classed('moving', false)
+          .classed('hide', true);
+        return;
+      }
 
-    var coords = thiz.getCoords(location);
+      // get an index of where the previous timestamp occured
+      var prevTimestamp = circle.attr('data-timestamp');
+      var index = thiz.cars[car].locations.indexOf(prevTimestamp);
 
-    var c = thiz.stopAnimating ? circle :
-      circle.transition().duration(thiz.speed);
+      // find the next index
+      var nextLocTimestamp = thiz.cars[car].locations[index + 1];
+      // find the next location
+      var nextLoc = thiz.cars[car][nextLocTimestamp];
 
-    c.attr({
-      cx: coords.x,
-      cy: coords.y
-    });
+      // if there is no next timestamp (ie, the car is unavailable and
+      // there we are still looping), the car should be hidden
+      if (nextLoc == null) {
+        circle.classed('hide', true);
+      }
+      // transfer the car towards it's next location
+      else {
+        circle.classed('moving', true);
+        // the difference in intervals between the next found timestamp
+        var intervals = (nextLocTimestamp - timestamp) / thiz.interval;
+        // next coords
+        var coords = thiz.getCoords(nextLoc);
+
+        // start the animation to the next location
+        circle.transition()
+          .ease('linear')
+          .duration(thiz.speed * intervals)
+          .attr({
+            cx: coords.x,
+            cy: coords.y
+          })
+          .each('end', function() {
+            d3.select(this).classed('moving', false);
+          });
+      }
+    }
+    else {
+      // should only occur the first time the car is available, so
+      // show it and put it in it's location
+      var coords = thiz.getCoords(loc);
+      // end any existing transitions
+      circle.transition();
+      // move the circle to it's location
+      circle
+        .classed('hide', false)
+        .attr({
+          cx: coords.x,
+          cy: coords.y,
+          'data-timestamp': timestamp
+        });
+    }
   };
 
   this.circles.each(update);
