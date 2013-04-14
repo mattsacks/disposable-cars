@@ -299,6 +299,8 @@ Graph.prototype.updateCars = function(timestamp) {
           .classed('hide', true);
         return;
       }
+      // else if we're already moving, don't touch
+      else if (circle.classed('moving')) return;
 
       // get an index of where the previous timestamp occured
       var prevTimestamp = circle.attr('data-timestamp');
@@ -344,6 +346,7 @@ Graph.prototype.updateCars = function(timestamp) {
       // move the circle to it's location
       circle
         .classed('hide', false)
+        .classed('moving', false)
         .attr({
           cx: coords.x,
           cy: coords.y,
