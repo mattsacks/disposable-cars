@@ -45,6 +45,10 @@ a {
 body {
   background-color: $bg-color;
   color: $font-color;
+
+  &.hide {
+    opacity: 0;
+  }
 }
 
 // ----- Headings

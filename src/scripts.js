@@ -1,6 +1,15 @@
 // yes I use global references
+//
 // deal with it
+
+var load = function() {
+  document.body.classList.remove('hide');
+  graph.animate();
+  hasLoaded = true;
+};
+
 var init = function() {
+  hasLoaded = false;
   // calculate the data
   data = calculate();
 
@@ -8,6 +17,10 @@ var init = function() {
   layer = mapbox.layer().id('mattsacks.map-pnviow60');
   // disable panning + zooming
   map = mapbox.map('map', layer, null, []);
+
+  map.addCallback('drawn', function() {
+    if (!hasLoaded) load();
+  });
 
   map.lat = 45.53252364902761;
   map.lon = -122.63711792602537;
@@ -21,7 +34,6 @@ var init = function() {
   graph = new Graph;
   graph.drawTimepath();
   graph.drawTimeline();
-  graph.animate();
 }
 
 // when we're ready

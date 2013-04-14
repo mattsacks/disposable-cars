@@ -18,6 +18,8 @@ a {
 body {
   background-color: #62cff0;
   color: #555555; }
+  body.hide {
+    opacity: 0; }
 
 h1 {
   font-family: "Raleway";
