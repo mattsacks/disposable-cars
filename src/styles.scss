@@ -2,23 +2,15 @@
 
 // ----- Fonts
 @import url(http://fonts.googleapis.com/css?family=Raleway:800);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
 
 // ----- Colors
 // OLD $bg-color: #f2f2ee;
-$bg-color: #62cff0;
+$bg-color: #80e1f3;
 $dark-color: darken($bg-color, 30%);
+$light-color: rgb(253,253,253);
 $font-color: #555;
-$border-color: rgba(255,255,255,0.5);
-
-// ---- styles
-%boxed-stat {
-  background-color: #FBFBFB;
-  border-radius: 5px;
-  border: 1px solid $border-color;
-  box-shadow: inset 0 1px 0 white, 0 1px 2px rgba(0,0,0,0.3);
-  text-shadow: 1px 1px 0 white;
-  padding: 3px 8px;
-}
+$border-color: rgba($dark-color, 0.25);
 
 // ----- Font Families
 @mixin font-bold {
@@ -26,6 +18,21 @@ $border-color: rgba(255,255,255,0.5);
   font-weight: 800;
 }
 
+@mixin font-sans {
+  font-family: "Source Sans Pro";
+  font-weight: 600;
+}
+
+// ---- styles
+%boxed-stat {
+  @include font-sans;
+  background-color: lighten($bg-color, 4%);
+  border-radius: 6px;
+  border: 1px solid $border-color;
+  border-color: rgba($dark-color, 0.3);
+  color: $light-color;
+  padding: 5px 12px;
+}
 
 // ----- Values
 $map-height: 600px;
@@ -54,9 +61,9 @@ body {
 // ----- Headings
 h1 {
   @include font-bold;
-  color: white;
+  color: $light-color;
   font-size: 62px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   margin: 0;
   padding: 15px 0;
   text-transform: uppercase;
@@ -68,7 +75,7 @@ h1 {
 
 h2 {
   @include font-bold;
-  color: white;
+  color: $light-color;
   font-size: 25px;
   margin: 0;
   letter-spacing: 0.04em;
@@ -87,12 +94,12 @@ h2 {
 // ----- Links
 a {
   @include transition(color 0.05s linear);
-  color: white;
-  border-bottom: 1px solid white;
+  color: $light-color;
+  border-bottom: 1px solid $light-color;
 
   &:hover {
-    color: darken(white, 1%);
-    border-bottom-color: darken(white, 1%);
+    color: darken($light-color, 1%);
+    border-bottom-color: darken($light-color, 1%);
   }
 }
 
@@ -105,11 +112,8 @@ a {
   width: 100%;
 }
 .stat {
-  @include font-bold;
-  font-family: "Lato";
   @extend %boxed-stat;
-  font-size: 30px;
-  vertical-align: top;
+  font-size: 29px;
 }
 // ----- Time 
 #time {
@@ -124,7 +128,7 @@ a {
 // ----- Map
 #map {
   border-top: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid rgba($dark-color, 0.4);
   height: $map-height;
 }
 
@@ -148,16 +152,17 @@ a {
 
 // ----- Timeline
 #timeline {
-  background: darken($bg-color, 8%);
+  background: rgba($dark-color, 0.275);
   border-bottom: 1px solid $border-color;
   height: 50px;
   margin: 0 auto;
   width: 100%;
 
   .time-marker {
-    stroke: #ba4537;
+    stroke: #d56f6f;
     stroke-width: 3px;
-    stroke-opacity: 0.8;
+    stroke-opacity: 0.9;
+    shape-rendering: crispEdges;
   }
 
   .count-path {
@@ -166,15 +171,13 @@ a {
   }
 
   .count-area {
-    fill: $font-color;
-    fill-opacity: 0.2;
+    fill: $dark-color;
+    fill-opacity: 0.3;
+  }
+
+  line {
+    stroke: $bg-color;
+    stroke-opacity: 1;
+    shape-rendering: crispEdges;
   }
 }
-
-#timeline line {
-  stroke: $font-color;
-  stroke-opacity: 0.8;
-  shape-rendering: crispEdges;
-}
-
-

@@ -1,11 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:800);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
 .stat {
-  background-color: #FBFBFB;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0 1px 0 white, 0 1px 2px rgba(0, 0, 0, 0.3);
-  text-shadow: 1px 1px 0 white;
-  padding: 3px 8px; }
+  font-family: "Source Sans Pro";
+  font-weight: 600;
+  background-color: #93e5f5;
+  border-radius: 6px;
+  border: 1px solid rgba(19, 171, 199, 0.25);
+  border-color: rgba(19, 171, 199, 0.3);
+  color: #fdfdfd;
+  padding: 5px 12px; }
 
 html, body {
   height: 100%;
@@ -16,7 +19,7 @@ a {
   text-decoration: none; }
 
 body {
-  background-color: #62cff0;
+  background-color: #80e1f3;
   color: #555555; }
   body.hide {
     opacity: 0; }
@@ -24,9 +27,9 @@ body {
 h1 {
   font-family: "Raleway";
   font-weight: 800;
-  color: white;
+  color: #fdfdfd;
   font-size: 62px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   margin: 0;
   padding: 15px 0;
   text-transform: uppercase; }
@@ -37,7 +40,7 @@ h1 {
 h2 {
   font-family: "Raleway";
   font-weight: 800;
-  color: white;
+  color: #fdfdfd;
   font-size: 25px;
   margin: 0;
   letter-spacing: 0.04em; }
@@ -56,11 +59,11 @@ a {
   -moz-transition: color 0.05s linear;
   -ms-transition: color 0.05s linear;
   transition: color 0.05s linear;
-  color: white;
-  border-bottom: 1px solid white; }
+  color: #fdfdfd;
+  border-bottom: 1px solid #fdfdfd; }
   a:hover {
-    color: #fcfcfc;
-    border-bottom-color: #fcfcfc; }
+    color: #fafafa;
+    border-bottom-color: #fafafa; }
 
 .stats-container {
   position: absolute;
@@ -69,11 +72,7 @@ a {
   width: 100%; }
 
 .stat {
-  font-family: "Raleway";
-  font-weight: 800;
-  font-family: "Lato";
-  font-size: 30px;
-  vertical-align: top; }
+  font-size: 29px; }
 
 #time {
   position: absolute;
@@ -84,8 +83,8 @@ a {
   right: 20px; }
 
 #map {
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(19, 171, 199, 0.25);
+  border-bottom: 1px solid rgba(19, 171, 199, 0.4);
   height: 600px; }
 
 #map-graph {
@@ -94,30 +93,30 @@ a {
   width: 100%; }
 
 .car {
-  fill: #1085a9;
-  stroke: #62cff0;
+  fill: #13abc7;
+  stroke: #80e1f3;
   stroke-width: 1px; }
   .car.hide {
     display: none; }
 
 #timeline {
-  background: #3dc4ec;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(19, 171, 199, 0.275);
+  border-bottom: 1px solid rgba(19, 171, 199, 0.25);
   height: 50px;
   margin: 0 auto;
   width: 100%; }
   #timeline .time-marker {
-    stroke: #ba4537;
+    stroke: #d56f6f;
     stroke-width: 3px;
-    stroke-opacity: 0.8; }
+    stroke-opacity: 0.9;
+    shape-rendering: crispEdges; }
   #timeline .count-path {
-    stroke: rgba(255, 255, 255, 0.5);
+    stroke: rgba(19, 171, 199, 0.25);
     fill: none; }
   #timeline .count-area {
-    fill: #555555;
-    fill-opacity: 0.2; }
-
-#timeline line {
-  stroke: #555555;
-  stroke-opacity: 0.8;
-  shape-rendering: crispEdges; }
+    fill: #13abc7;
+    fill-opacity: 0.3; }
+  #timeline line {
+    stroke: #80e1f3;
+    stroke-opacity: 1;
+    shape-rendering: crispEdges; }
