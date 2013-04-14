@@ -39,8 +39,8 @@ Graph.prototype.gather = function() {
 
   // the time element
   this.time = d3.select('#time');
-  // format as "{day of week} at {24hour:minute} {AM/PM}"
-  this.timeFormat = d3.time.format('%A at %H:%M');
+  // format as "{day of week} at {12hour:minute} {AM/PM}"
+  this.timeFormat = d3.time.format('%A at %I:%M %p');
   // timeline element
   this.timeline = d3.select('#timeline');
 
@@ -82,8 +82,8 @@ Graph.prototype.attach = function() {
   window.addEventListener('resize', throttle(function() {
     // update the timeline
     thiz.getScales();
-    thiz.drawTimeline();
     thiz.drawTimepath();
+    thiz.drawTimeline();
   }, 25));
 };
 
@@ -102,14 +102,6 @@ Graph.prototype.drawTimeline = function() {
     .attr({
       'class': 'tick-container',
     })
-
-  // draw a timeline marker
-  var marker = this.timeline.append('svg:line')
-    .attr({
-      'class': 'time-marker',
-      'y1': height - 20,
-      'y2': height
-    });
 
   // number of ticks we need
   var ticks = (end - start) / this.interval;
@@ -156,6 +148,14 @@ Graph.prototype.drawTimeline = function() {
         })
     }
   }
+
+  // draw a timeline marker
+  var marker = this.timeline.append('svg:line')
+    .attr({
+      'class': 'time-marker',
+      'y1': height - 20,
+      'y2': height
+    });
 };
 
 // draws the path element in the timeline
