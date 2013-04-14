@@ -1,20 +1,19 @@
 @import 'mixins';
 
 // ----- Fonts
-@import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
-@import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
-// @import url(http://fonts.googleapis.com/css?family=Merriweather);
+@import url(http://fonts.googleapis.com/css?family=Raleway:800);
 
 // ----- Colors
-$bg-color: #f0f0ee;
-$link-color: #3589ac;
+// OLD $bg-color: #f2f2ee;
+$bg-color: #62cff0;
+$dark-color: darken($bg-color, 30%);
 $font-color: #555;
-$border-color: #BBB;
+$border-color: rgba(255,255,255,0.5);
 
 // ---- styles
 %boxed-stat {
-  background-color: #FAFAFA;
-  border-radius: 4px;
+  background-color: #FBFBFB;
+  border-radius: 5px;
   border: 1px solid $border-color;
   box-shadow: inset 0 1px 0 white, 0 1px 2px rgba(0,0,0,0.3);
   text-shadow: 1px 1px 0 white;
@@ -22,15 +21,11 @@ $border-color: #BBB;
 }
 
 // ----- Font Families
-@mixin font-marker {
-  font-family: "Permanent Marker";
-  font-weight: 400;
+@mixin font-bold {
+  font-family: "Raleway";
+  font-weight: 800;
 }
 
-@mixin font-cute {
-  font-family: "Shadows Into Light Two";
-  font-weight: 400;
-}
 
 // ----- Values
 $map-height: 600px;
@@ -54,10 +49,13 @@ body {
 
 // ----- Headings
 h1 {
-  @include font-marker;
+  @include font-bold;
+  color: white;
   font-size: 62px;
-  margin: 5px 0;
-  text-shadow: 0 1px 0 white;
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding: 15px 0;
+  text-transform: uppercase;
 
   @include mobile {
     font-size: 45px;
@@ -65,26 +63,32 @@ h1 {
 }
 
 h2 {
-  @include font-marker;
+  @include font-bold;
+  color: white;
   font-size: 25px;
   margin: 0;
+  letter-spacing: 0.04em;
 }
 
 #header {
   text-align: center;
 }
 #footer {
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: center;
+  padding-bottom: 2px;
+  text-transform: uppercase;
 }
 
 // ----- Links
 a {
   @include transition(color 0.05s linear);
-  color: $link-color;
+  color: white;
+  border-bottom: 1px solid white;
 
   &:hover {
-    color: darken($link-color, 3%);
+    color: darken(white, 1%);
+    border-bottom-color: darken(white, 1%);
   }
 }
 
@@ -98,6 +102,7 @@ a {
 }
 .stat {
   @include font-bold;
+  font-family: "Lato";
   @extend %boxed-stat;
   font-size: 30px;
   vertical-align: top;
@@ -127,9 +132,9 @@ a {
 }
 
 .car {
-  fill: #74b6d9;
-  stroke: white;
-  stroke-opacity: 0.5;
+  fill: $dark-color;
+  stroke: $bg-color;
+  // stroke-opacity: 0.5;
   stroke-width: 1px;
 
   &.hide {
@@ -139,10 +144,11 @@ a {
 
 // ----- Timeline
 #timeline {
+  background: darken($bg-color, 8%);
+  border-bottom: 1px solid $border-color;
   height: 50px;
   margin: 0 auto;
   width: 100%;
-  border-bottom: 1px solid $border-color;
 
   .time-marker {
     stroke: #ba4537;
@@ -157,7 +163,7 @@ a {
 
   .count-area {
     fill: $font-color;
-    fill-opacity: 0.08;
+    fill-opacity: 0.2;
   }
 }
 
