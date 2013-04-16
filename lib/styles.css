@@ -1,15 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:800);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
-.stat {
-  font-family: "Source Sans Pro";
-  font-weight: 600;
-  background-color: #93e5f5;
-  border-radius: 6px;
-  border: 1px solid rgba(19, 171, 199, 0.25);
-  border-color: rgba(19, 171, 199, 0.3);
-  color: #fdfdfd;
-  padding: 5px 12px; }
-
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
 html, body {
   height: 100%;
   margin: 0;
@@ -27,7 +17,7 @@ body {
 h1 {
   font-family: "Raleway";
   font-weight: 800;
-  color: #fdfdfd;
+  color: #fefefe;
   font-size: 62px;
   letter-spacing: 0.04em;
   margin: 0;
@@ -40,7 +30,7 @@ h1 {
 h2 {
   font-family: "Raleway";
   font-weight: 800;
-  color: #fdfdfd;
+  color: #fefefe;
   font-size: 25px;
   margin: 0;
   letter-spacing: 0.04em; }
@@ -59,38 +49,56 @@ a {
   -moz-transition: color 0.05s linear;
   -ms-transition: color 0.05s linear;
   transition: color 0.05s linear;
-  color: #fdfdfd;
-  border-bottom: 1px solid #fdfdfd; }
+  color: #fefefe;
+  border-bottom: 1px solid #fefefe; }
   a:hover {
-    color: #fafafa;
-    border-bottom-color: #fafafa; }
+    color: #fbfbfb;
+    border-bottom-color: #fbfbfb; }
 
 .stats-container {
-  position: absolute;
-  top: 110px;
-  z-index: 2;
-  width: 100%; }
+  margin: 0 auto;
+  max-width: 1000px;
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 3; }
 
 .stat {
-  font-size: 29px; }
+  font-family: "Open Sans Condensed";
+  font-weight: 700;
+  font-size: 38px;
+  color: #fefefe;
+  text-transform: uppercase; }
 
-#time {
+#day {
   position: absolute;
   left: 20px; }
 
-#count {
+#time {
   position: absolute;
   right: 20px; }
 
 #map {
-  border-top: 1px solid rgba(19, 171, 199, 0.25);
   border-bottom: 1px solid rgba(19, 171, 199, 0.4);
-  height: 600px; }
+  border-top: 1px solid rgba(19, 171, 199, 0.25);
+  height: 600px;
+  position: relative; }
+
+.overlay {
+  background-color: #80e1f3;
+  height: 100%;
+  left: 0;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1; }
 
 #map-graph {
-  height: 600px;
+  height: 100%;
   position: relative;
-  width: 100%; }
+  width: 100%;
+  z-index: 2; }
 
 .car {
   fill: #13abc7;
