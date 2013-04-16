@@ -2,7 +2,7 @@
 
 // ----- Fonts
 @import url(http://fonts.googleapis.com/css?family=Raleway:800);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
 
 // ----- Colors
 // OLD $bg-color: #f2f2ee;
@@ -18,19 +18,17 @@ $border-color: rgba($dark-color, 0.25);
   font-weight: 800;
 }
 
-@mixin font-sans {
-  font-family: "Source Sans Pro";
-  font-weight: 600;
+@mixin font-stat {
+  font-family: "Open Sans Condensed";
+  font-weight: 700;
 }
 
 // ---- styles
-%boxed-stat {
-  @include font-sans;
+%boxed {
   background-color: lighten($bg-color, 4%);
   border-radius: 6px;
   border: 1px solid $border-color;
   border-color: rgba($dark-color, 0.3);
-  color: $light-color;
   padding: 5px 12px;
 }
 
@@ -106,21 +104,25 @@ a {
 // --------------------
 // ----- Stats Headings
 .stats-container {
-  position: absolute;
-  top: 110px;
-  z-index: 2;
+  margin: 0 auto;
+  max-width: 1000px;
+  position: relative;
+  top: 0;
   width: 100%;
+  z-index: 3;
 }
 .stat {
-  @extend %boxed-stat;
-  font-size: 29px;
+  @include font-stat;
+  font-size: 38px;
+  color: $light-color;
+  text-transform: uppercase;
 }
 // ----- Time 
-#time {
+#day {
   position: absolute;
   left: 20px;
 }
-#count {
+#time {
   position: absolute;
   right: 20px;
 }

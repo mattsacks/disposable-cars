@@ -37,10 +37,18 @@ Graph.prototype.gather = function() {
   // the count text
   this.count = d3.select('#count');
 
-  // the time element
-  this.time = d3.select('#time');
-  // format as "{day of week} at {12hour:minute} {AM/PM}"
-  this.timeFormat = d3.time.format('%A at %I:%M %p');
+  // time elements
+  this.day = {
+    element: d3.select('#day'),
+    // {day of week}
+    format: d3.time.format('%A')
+  };
+  this.time = {
+    element: d3.select('#time'),
+    // {12hour,space padded:minute} {AM/PM}
+    format: d3.time.format('%_I:%M %p')
+  };
+
   // timeline element
   this.timeline = d3.select('#timeline');
 
@@ -264,8 +272,9 @@ Graph.prototype.update = function(timestamp, speed) {
   this.data = this.calculate();
 
   // update text stats
-  // this.count.text(this.data.numCars + ' cars available');
-  this.time.text(this.timeFormat(new Date(timestamp)));
+  var date = new Date(timestamp);
+  this.day.element.text(this.day.format(date));
+  this.time.element.text(this.time.format(date));
 
   // update the position of the timeline marker
   var x = this.xscale(timestamp);
