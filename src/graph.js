@@ -51,6 +51,10 @@ Graph.prototype.gather = function() {
 
   // timeline element
   this.timeline = d3.select('#timeline');
+  // height of the timeline element
+  this.timeline.height = parseInt(
+    this.timeline.style('height').replace(/px/, '')
+  );
 
   // collect scales
   this.getScales();
@@ -58,14 +62,11 @@ Graph.prototype.gather = function() {
 
 // collect scales based on browser size
 Graph.prototype.getScales = function() {
-  // get an x scale from the starting date to the ending date for the width of
-  // the map
-  var width = this.container.node().clientWidth;
   var start = +new Date(this.start);
   var end = +Date.nowsTenth;
   this.xscale = d3.scale.linear()
     .domain([start, end])
-    .range([0, width]);
+    .range([0, window.innerWidth]);
 };
 
 // attach events to handlers
@@ -74,7 +75,7 @@ Graph.prototype.attach = function() {
   var timeline = this.timeline.node();
 
   timeline.addEventListener('mousemove', throttle(function(e) {
-    var x = e.offsetX;
+    var x = e.clientX;
     var timestamp = thiz.xscale.invert(x);
     thiz.timestamp = +new Date(timestamp).getTenth();
 
@@ -100,9 +101,6 @@ Graph.prototype.drawTimeline = function() {
   // clear any ticks previously drawn
   this.timeline.select('.tick-container').remove();
 
-  // get attributes from the #timeline element
-  var element = this.timeline.node();
-  var height = element.clientHeight;
   var start = +new Date(this.start);
   var end = +Date.nowsTenth;
 
@@ -125,19 +123,19 @@ Graph.prototype.drawTimeline = function() {
     if (i % 144 == 0) {
       attrs = {
         'class': 'divider',
-        'y1': height - 30
+        'y1': this.timeline.height - 30
       };
     }
     else if (i % 36 == 0) {
       attrs = {
         'class': 'big-tick',
-        'y1': height - 15
+        'y1': this.timeline.height - 15
       };
     }
     else if (i % 6 == 0) {
       attrs = {
         'class': 'small-tick',
-        'y1': height - 5
+        'y1': this.timeline.height - 5
       }
     }
 
@@ -150,7 +148,7 @@ Graph.prototype.drawTimeline = function() {
       container.append('svg:line')
         .attr(attrs)
         .attr({
-          'y2': height,
+          'y2': this.timeline.height,
           'x1': x,
           'x2': x
         })
@@ -161,21 +159,20 @@ Graph.prototype.drawTimeline = function() {
   var marker = this.timeline.append('svg:line')
     .attr({
       'class': 'time-marker',
-      'y1': height - 20,
-      'y2': height
+      'y1': this.timeline.height - 20,
+      'y2': this.timeline.height
     });
 };
 
 // draws the path element in the timeline
 Graph.prototype.drawTimepath = function() {
   var thiz = this;
-  var height = this.timeline.node().clientHeight;
 
   // yscale from 0 number cars found to the max num of cars is the
   // total number found in the dataset
   var yscale = d3.scale.linear()
     .domain([100, this.ids.length])
-    .range([height, 0]);
+    .range([this.timeline.height, 0]);
 
   // path function
   var path = d3.svg.line()
@@ -188,7 +185,7 @@ Graph.prototype.drawTimepath = function() {
   // area function
   var area = d3.svg.area()
     .x(this.xscale)
-    .y0(height)
+    .y0(this.timeline.height)
     .y1(function(d) {
       thiz.timestamp = d;
       return yscale(thiz.calculate().numCars);
