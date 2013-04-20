@@ -108,9 +108,9 @@ a {
     display: none; }
 
 #timeline {
-  background: rgba(19, 171, 199, 0.275);
+  background: rgba(19, 171, 199, 0.3);
   border-bottom: 1px solid rgba(19, 171, 199, 0.25);
-  height: 50px;
+  height: 60px;
   margin: 0 auto;
   width: 100%; }
   #timeline .time-marker {

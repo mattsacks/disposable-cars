@@ -157,7 +157,6 @@ a {
 .car {
   fill: $dark-color;
   stroke: $bg-color;
-  // stroke-opacity: 0.5;
   stroke-width: 1px;
 
   &.hide {
@@ -167,9 +166,9 @@ a {
 
 // ----- Timeline
 #timeline {
-  background: rgba($dark-color, 0.275);
+  background: rgba($dark-color, 0.3);
   border-bottom: 1px solid $border-color;
-  height: 50px;
+  height: 60px;
   margin: 0 auto;
   width: 100%;
 
