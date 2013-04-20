@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:800);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
 html, body {
   height: 100%;
   margin: 0;
@@ -21,7 +21,7 @@ h1 {
   font-size: 62px;
   letter-spacing: 0.04em;
   margin: 0;
-  padding: 15px 0;
+  padding: 10px 0 5px;
   text-transform: uppercase; }
   @media (max-width: 500px) {
     h1 {
@@ -35,7 +35,16 @@ h2 {
   margin: 0;
   letter-spacing: 0.04em; }
 
+h3 {
+  font-family: "Georgia";
+  font-weight: normal;
+  color: #fdfefe;
+  font-size: 16px;
+  font-style: italic;
+  margin: 0; }
+
 #header {
+  margin: 5px 0 20px;
   text-align: center; }
 
 #footer {
@@ -65,9 +74,9 @@ a {
 
 .stat {
   font-family: "Open Sans Condensed";
-  font-weight: 700;
-  font-size: 38px;
-  color: #fefefe;
+  font-weight: 300;
+  font-size: 42px;
+  color: #1197b0;
   text-transform: uppercase; }
 
 #day {
@@ -79,8 +88,8 @@ a {
   right: 20px; }
 
 #map {
-  border-bottom: 1px solid rgba(19, 171, 199, 0.4);
-  border-top: 1px solid rgba(19, 171, 199, 0.25);
+  border-bottom: 1px solid rgba(21, 191, 222, 0.4);
+  border-top: 1px solid rgba(21, 191, 222, 0.25);
   height: 600px;
   position: relative; }
 
@@ -101,15 +110,15 @@ a {
   z-index: 2; }
 
 .car {
-  fill: #13abc7;
-  stroke: #80e1f3;
+  fill: #15bfde;
+  stroke: #14b3d0;
   stroke-width: 1px; }
   .car.hide {
     display: none; }
 
 #timeline {
-  background: rgba(19, 171, 199, 0.3);
-  border-bottom: 1px solid rgba(19, 171, 199, 0.25);
+  background: rgba(21, 191, 222, 0.4);
+  border-bottom: 1px solid rgba(21, 191, 222, 0.25);
   height: 60px;
   margin: 0 auto;
   width: 100%; }
@@ -119,10 +128,10 @@ a {
     stroke-opacity: 0.9;
     shape-rendering: crispEdges; }
   #timeline .count-path {
-    stroke: rgba(19, 171, 199, 0.25);
+    stroke: rgba(21, 191, 222, 0.25);
     fill: none; }
   #timeline .count-area {
-    fill: #13abc7;
+    fill: #15bfde;
     fill-opacity: 0.3; }
   #timeline line {
     stroke: #80e1f3;

@@ -2,12 +2,13 @@
 
 // ----- Fonts
 @import url(http://fonts.googleapis.com/css?family=Raleway:800);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
 
 // ----- Colors
 // OLD $bg-color: #f2f2ee;
 $bg-color: #80e1f3;
-$dark-color: darken($bg-color, 30%);
+$alt-color: darken($bg-color, 35%);
+$dark-color: darken($bg-color, 25%);
 $light-color: rgb(254,254,254);
 $font-color: #555;
 $border-color: rgba($dark-color, 0.25);
@@ -20,7 +21,12 @@ $border-color: rgba($dark-color, 0.25);
 
 @mixin font-stat {
   font-family: "Open Sans Condensed";
-  font-weight: 700;
+  font-weight: 300;
+}
+
+@mixin font-serif {
+  font-family: "Georgia";
+  font-weight: normal;
 }
 
 // ---- styles
@@ -63,7 +69,7 @@ h1 {
   font-size: 62px;
   letter-spacing: 0.04em;
   margin: 0;
-  padding: 15px 0;
+  padding: 10px 0 5px;
   text-transform: uppercase;
 
   @include mobile {
@@ -79,7 +85,16 @@ h2 {
   letter-spacing: 0.04em;
 }
 
+h3 {
+  @include font-serif;
+  color: #fdfefe;
+  font-size: 16px;
+  font-style: italic;
+  margin: 0;
+}
+
 #header {
+  margin: 5px 0 20px;
   text-align: center;
 }
 #footer {
@@ -113,8 +128,8 @@ a {
 }
 .stat {
   @include font-stat;
-  font-size: 38px;
-  color: $light-color;
+  font-size: 42px;
+  color: $alt-color;
   text-transform: uppercase;
 }
 // ----- Time 
@@ -156,7 +171,7 @@ a {
 
 .car {
   fill: $dark-color;
-  stroke: $bg-color;
+  stroke: darken($dark-color, 3%);
   stroke-width: 1px;
 
   &.hide {
@@ -166,7 +181,7 @@ a {
 
 // ----- Timeline
 #timeline {
-  background: rgba($dark-color, 0.3);
+  background: rgba($dark-color, 0.4);
   border-bottom: 1px solid $border-color;
   height: 60px;
   margin: 0 auto;
