@@ -6,6 +6,8 @@ Array.prototype.last = function() {
   return this[this.length - 1];
 };
 
+// 1 hour in milliseconds
+Date.hour = 3600000;
 // 24 hours in milliseconds
 Date.day = 86400000;
 // array of days of the week
