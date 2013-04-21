@@ -51,6 +51,16 @@ var mappings = {
     car.locations = Object.keys(car);
     car.locationsLength = car.locations.length;
     return car;
+  },
+  // first found timestamp
+  start: function(car) {
+    return car.locations != null ?
+      +car.locations[0] : undefined;
+  },
+  // last found timestamp
+  end: function(car) {
+    return car.locations != null ?
+      +car.locations.last() : undefined;
   }
 };
 
@@ -59,6 +69,14 @@ var reductions = {
     cur = cur || 0;
     if (delta > cur) cur = delta;
     return cur;
+  },
+  start: function(start, earliest) {
+    return start == null ? earliest :
+      earliest < start ? earliest : start;
+  },
+  end: function(end, latest) {
+    return end == null ? latest :
+      latest > end ? latest : end;
   }
 };
 

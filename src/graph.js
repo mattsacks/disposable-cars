@@ -14,8 +14,10 @@ var Graph = function() {
   this.speed = 200;
 
   // the start of it
-  this.start = new Date().clearTime().decrement('day', this.nDays);
+  this.start = new Date(data.start);
+  // set the timestamp to be a clone of a date object at the first start
   this.timestamp = +this.start;
+  this.end = data.end;
 
   // get elements
   this.gather();
@@ -62,10 +64,8 @@ Graph.prototype.gather = function() {
 
 // collect scales based on browser size
 Graph.prototype.getScales = function() {
-  var start = +new Date(this.start);
-  var end = +Date.nowsTenth;
   this.xscale = d3.scale.linear()
-    .domain([start, end])
+    .domain([+this.start, this.end])
     .range([0, window.innerWidth]);
 };
 
@@ -101,8 +101,8 @@ Graph.prototype.drawTimeline = function() {
   // clear any ticks previously drawn
   this.timeline.select('.tick-container').remove();
 
-  var start = +new Date(this.start);
-  var end = +Date.nowsTenth;
+  var start = +this.start;
+  var end = this.end;
 
   var container = this.timeline.append('svg:g')
     .attr({
@@ -192,9 +192,7 @@ Graph.prototype.drawTimepath = function() {
     });
 
   // generate a range of time intervals between the start and end
-  var start = +new Date(this.start);
-  var end = +new Date(Date.nowsTenth);
-  var timestamps = d3.range(start, end, this.interval);
+  var timestamps = d3.range(+this.start, this.end, this.interval);
 
   var generatePath = function(className, dFunction) {
     // remove any existing path first
@@ -213,7 +211,7 @@ Graph.prototype.drawTimepath = function() {
   // generatePath('count-path', path);
 
   // reset timestamp to beginning
-  this.timestamp = +start;
+  this.timestamp = +this.start;
 };
 
 Graph.prototype.animate = function(start, speed) {
