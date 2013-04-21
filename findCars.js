@@ -92,8 +92,10 @@ event.on('json', function(json) {
     // create an object for the car if it doesn't exist
     if (car == null) car = cars[name] = {};
 
-    // add a key for the current 10 minute interval and 
+    // add a key for the current 10 minute interval at the coordinates
     car[+timestamp] = availableCar.coordinates;
+    // update the locations property
+    car.locations = Object.keys(car);
   }
 
   // string of code to test if window or exports to evaluate as javascript

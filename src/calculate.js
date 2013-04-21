@@ -45,11 +45,12 @@ var mappings = {
     var last = new Date(+timestamps.last()).clearTime();
     return (last - first) / Date.day;
   },
-  // set a property on each car's object for the # of timestamps it has recorded
-  // FIXME should be done in findCars.js?
+  // temporary locations setting REMOVEME
   locations: function(car) {
-    car.locations = Object.keys(car);
-    car.locationsLength = car.locations.length;
+    if (car.locations == null) {
+      car.locations = Object.keys(car);
+      car.locationsLength = car.locations.length;
+    }
     return car;
   },
   // first found timestamp
