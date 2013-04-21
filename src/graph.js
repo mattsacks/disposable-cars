@@ -269,7 +269,7 @@ Graph.prototype.update = function(timestamp, speed) {
   this.data = this.calculate();
 
   // update text stats
-  var date = new Date(timestamp);
+  var date = new Date(timestamp).inPortland();
   this.day.element.text(this.day.format(date));
   this.time.element.text(this.time.format(date));
 

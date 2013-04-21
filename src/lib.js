@@ -6,6 +6,20 @@ Array.prototype.last = function() {
   return this[this.length - 1];
 };
 
+// convert a date to UTC time
+Date.prototype.inUTC = function() {
+  var offset = this.getTimezoneOffset();
+  this.setTime(+this + (offset*60000));
+  return this;
+};
+
+// convert a Date to portland time
+Date.prototype.inPortland = function() {
+  this.inUTC();
+  this.setHours(this.getHours() - 7);
+  return this;
+};
+
 // 1 hour in milliseconds
 Date.hour = 3600000;
 // 24 hours in milliseconds
