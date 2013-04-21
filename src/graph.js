@@ -244,6 +244,8 @@ Graph.prototype.animate = function(start, speed) {
     thiz.animation = thiz.stopAnimating == true ?
       // set the animation to undefined if told to stop udating
       clearTimeout(thiz.animation) :
+      // if we're at a time greater than available, stop
+      thiz.timestamp > thiz.end ? clearTimeout(thiz.animation) :
       // otherwise, keep animating
       setTimeout(loop, speed);
   };
@@ -258,7 +260,7 @@ Graph.prototype.update = function(timestamp, speed) {
   var marker = this.timeline.select('.time-marker');
 
   // don't try to update if we're at a time beyond what we'll have data for
-  if (timestamp > +Date.nowsTenth) return;
+  if (timestamp > this.end) return this.stop();
 
   // redraw all the cars with the current timestamp
   this.updateCars(timestamp);
@@ -287,7 +289,7 @@ Graph.prototype.update = function(timestamp, speed) {
 // updates the car positions according to the given timestamp
 Graph.prototype.updateCars = function(timestamp) {
   var thiz = this;
-  timestamp = timestamp || +this.ago;
+  if (timestamp == null) return;
 
   // updates an individual car by it's id
   var update = function(car) {
@@ -367,6 +369,13 @@ Graph.prototype.updateCars = function(timestamp) {
   };
 
   this.circles.each(update);
+};
+
+// ends any animation loop
+Graph.prototype.stop = function() {
+  if (this['animation'] != null)
+    this.animation = clearTimeout(this.animation);
+  return this;
 };
 
 // return an { x: x, y: y } object from a single location data
