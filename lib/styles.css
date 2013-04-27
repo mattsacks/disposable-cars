@@ -44,7 +44,7 @@ h3 {
   margin: 0; }
 
 #header {
-  margin: 5px 0 20px;
+  margin: 5px 0 15px;
   text-align: center; }
 
 #footer {
@@ -68,15 +68,15 @@ a {
   margin: 0 auto;
   max-width: 1000px;
   position: relative;
-  top: 0;
+  top: 5px;
   width: 100%;
   z-index: 3; }
 
 .stat {
   font-family: "Open Sans Condensed";
-  font-weight: 300;
-  font-size: 42px;
-  color: #1197b0;
+  font-weight: 700;
+  font-size: 38px;
+  color: #119fb9;
   text-transform: uppercase; }
 
 #day {
@@ -111,7 +111,7 @@ a {
 
 .car {
   fill: #15bfde;
-  stroke: #14b3d0;
+  stroke: #13abc7;
   stroke-width: 1px; }
   .car.hide {
     display: none; }
@@ -132,7 +132,7 @@ a {
     fill: none; }
   #timeline .count-area {
     fill: #15bfde;
-    fill-opacity: 0.3; }
+    fill-opacity: 0.4; }
   #timeline line {
     stroke: #80e1f3;
     stroke-opacity: 1;

@@ -7,7 +7,7 @@
 // ----- Colors
 // OLD $bg-color: #f2f2ee;
 $bg-color: #80e1f3;
-$alt-color: darken($bg-color, 35%);
+$alt-color: darken($bg-color, 33%);
 $dark-color: darken($bg-color, 25%);
 $light-color: rgb(254,254,254);
 $font-color: #555;
@@ -21,7 +21,7 @@ $border-color: rgba($dark-color, 0.25);
 
 @mixin font-stat {
   font-family: "Open Sans Condensed";
-  font-weight: 300;
+  font-weight: 700;
 }
 
 @mixin font-serif {
@@ -94,7 +94,7 @@ h3 {
 }
 
 #header {
-  margin: 5px 0 20px;
+  margin: 5px 0 15px;
   text-align: center;
 }
 #footer {
@@ -122,13 +122,13 @@ a {
   margin: 0 auto;
   max-width: 1000px;
   position: relative;
-  top: 0;
+  top: 5px;
   width: 100%;
   z-index: 3;
 }
 .stat {
   @include font-stat;
-  font-size: 42px;
+  font-size: 38px;
   color: $alt-color;
   text-transform: uppercase;
 }
@@ -171,7 +171,7 @@ a {
 
 .car {
   fill: $dark-color;
-  stroke: darken($dark-color, 3%);
+  stroke: darken($dark-color, 5%);
   stroke-width: 1px;
 
   &.hide {
@@ -201,7 +201,7 @@ a {
 
   .count-area {
     fill: $dark-color;
-    fill-opacity: 0.3;
+    fill-opacity: 0.4;
   }
 
   line {
