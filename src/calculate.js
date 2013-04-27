@@ -45,31 +45,31 @@ var mappings = {
     var last = new Date(+timestamps.last()).clearTime();
     return (last - first) / Date.day;
   },
-  // temporary locations setting REMOVEME
+  // get locations on each car
   locations: function(car) {
-    if (car.locations == null) {
-      car.locations = Object.keys(car);
-      car.locationsLength = car.locations.length;
+    if (car.locations != null) {
+      // delete known keys that aren't timestamps
+      delete car.locations;
+      delete car.locationsLength;
     }
+    car.locations = Object.keys(car);
+    car.locationsLength = car.locations.length;
     return car;
   },
   // first found timestamp
   start: function(car) {
-    return car.locations != null ?
-      +car.locations[0] : undefined;
+    return +car.locations[0];
   },
   // last found timestamp
   end: function(car) {
-    return car.locations != null ?
-      +car.locations.last() : undefined;
+    return +car.locations.last();
   }
 };
 
 var reductions = {
   numDays: function(cur, delta) {
     cur = cur || 0;
-    if (delta > cur) cur = delta;
-    return cur;
+    return delta > cur ? delta : cur;
   },
   start: function(start, earliest) {
     return start == null ? earliest :

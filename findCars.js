@@ -25,7 +25,7 @@ Date.prototype.clearTime = function() {
 
 var today = +new Date().clearTime();
 var aDay = 86400000;
-var nDays = 5;
+var nDays = 3;
 
 // go through the JSON and remove any coordinates that are older than nDays
 for (var car in cars) {
@@ -94,8 +94,6 @@ event.on('json', function(json) {
 
     // add a key for the current 10 minute interval at the coordinates
     car[+timestamp] = availableCar.coordinates;
-    // update the locations property
-    car.locations = Object.keys(car);
   }
 
   // string of code to test if window or exports to evaluate as javascript
