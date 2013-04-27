@@ -22,10 +22,6 @@ var init = function() {
   // disable panning + zooming
   map = mapbox.map('map', layer, null, []);
 
-  map.addCallback('drawn', function() {
-    if (!hasLoaded) load();
-  });
-
   map.lat = 45.53252364902761;
   map.lon = -122.63711792602537;
 
@@ -38,6 +34,11 @@ var init = function() {
   graph = new Graph;
   graph.drawTimepath();
   graph.drawTimeline();
+
+  // initialize the page when the map has been loaded up
+  map.addCallback('drawn', function() {
+    if (!hasLoaded) load();
+  });
 }
 
 // when we're ready
