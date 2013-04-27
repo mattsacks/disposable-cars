@@ -74,14 +74,29 @@ Graph.prototype.attach = function() {
   var thiz = this;
   var timeline = this.timeline.node();
 
-  timeline.addEventListener('mousemove', throttle(function(e) {
-    var x = e.clientX;
+  // take an event object and update the cars at the found x location
+  var getX = function(e) {
+    var x = e.pageX || e.clientX;
     var timestamp = thiz.xscale.invert(x);
     thiz.timestamp = +new Date(timestamp).getTenth();
 
     thiz.stopAnimating = true;
     thiz.update(thiz.timestamp);
-  }, 15));
+  };
+
+  // mouse move over the timeline
+  timeline.addEventListener('mousemove', throttle(getX, 15));
+  // touchmove on the timeline to update it
+  timeline.addEventListener('touchmove', throttle(getX, 15));
+  // touchstart on the timeline to stop updating
+  timeline.addEventListener('touchstart', function() {
+    thiz.stopAnimating = true;
+  });
+  // touchend on the timeline to continue animating
+  timeline.addEventListener('touchend', function() {
+    thiz.stopAnimating = false;
+    thiz.animate();
+  });
 
   this.container.node().addEventListener('mouseover', function() {
     thiz.stopAnimating = false;
