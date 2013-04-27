@@ -115,6 +115,7 @@ Graph.prototype.attach = function() {
 Graph.prototype.drawTimeline = function() {
   // clear any ticks previously drawn
   this.timeline.select('.tick-container').remove();
+  this.timeline.select('.time-marker').remove();
 
   var start = +this.start;
   var end = this.end;
@@ -186,9 +187,10 @@ Graph.prototype.drawTimepath = function() {
   // yscale from 0 number cars found to the max num of cars is the
   // total number found in the dataset
   var yscale = d3.scale.linear()
-    .domain([100, this.ids.length])
+    .domain([0, this.ids.length])
     .range([this.timeline.height, 0]);
 
+  // FIXME inefficient to iterate over the dataset for each car
   // path function
   var path = d3.svg.line()
     .x(this.xscale)
