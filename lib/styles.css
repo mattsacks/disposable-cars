@@ -72,7 +72,7 @@ a {
   width: 100%;
   z-index: 3; }
 
-.stat {
+.stat, #loader h4 {
   font-family: "Open Sans Condensed";
   font-weight: 700;
   font-size: 38px;
@@ -115,6 +115,22 @@ a {
   stroke-width: 1px; }
   .car.hide {
     display: none; }
+
+#loader {
+  background: rgba(0, 0, 0, 0.1);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3; }
+  #loader.hide {
+    display: none; }
+  #loader h4 {
+    font-size: 50px;
+    left: 15%;
+    position: absolute;
+    top: 25%; }
 
 #timeline {
   background: rgba(21, 191, 222, 0.4);

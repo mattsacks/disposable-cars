@@ -5,7 +5,7 @@ var Graph = function() {
   this.ids = Object.keys(this.cars);
 
   // the number of days tracked
-  this.nDays = window.data.numDays;
+  this.nDays = app.data.numDays;
 
   // the timestamp intervals in ms being tracked
   this.interval = 600000; // 10 minutes
@@ -14,10 +14,10 @@ var Graph = function() {
   this.speed = 200;
 
   // the start of it
-  this.start = new Date(data.start);
+  this.start = new Date(app.data.start);
   // set the timestamp to be a clone of a date object at the first start
   this.timestamp = +this.start;
-  this.end = data.end;
+  this.end = app.data.end;
 
   // get elements
   this.gather();
@@ -412,7 +412,7 @@ Graph.prototype.getCoords = function(location) {
     lon: location[0],
     lat: location[1]
   };
-  return window.map.locationPoint(coords);
+  return map.locationPoint(coords);
 };
 
 // calculations on data

@@ -179,6 +179,29 @@ a {
   }
 }
 
+// ----- Loader
+#loader {
+  background: rgba(0,0,0,0.1);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+
+  &.hide {
+    display: none;
+  }
+
+  h4 {
+    @extend .stat;
+    font-size: 50px;
+    left: 15%;
+    position: absolute;
+    top: 25%;
+  }
+}
+
 // ----- Timeline
 #timeline {
   background: rgba($dark-color, 0.4);
