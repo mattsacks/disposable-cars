@@ -18,6 +18,11 @@
   @include experimental(transition, $transition);
 }
 
+// ----- User Select
+@mixin user-select($value: none) {
+  @include experimental(user-select, $value);
+}
+
 // ----- Media Queries
 @mixin small($width: 800px) {
   @media(screen and max-width: $width) {

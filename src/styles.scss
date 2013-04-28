@@ -145,6 +145,7 @@ a {
 
 // ----- Map
 #map {
+  @include user-select;
   border-bottom: 1px solid $border-color;
   border-top: 1px solid $border-color;
   height: $map-height;
@@ -240,7 +241,7 @@ a {
 
 // ----- Timeline
 #timeline {
-  box-shadow: inset 0 1px 0 $bg-color;
+  @include user-select;
   background: rgba($dark-color, 0.4);
   border-bottom: 1px solid $dark-color;
   height: 60px;
