@@ -93,6 +93,10 @@ h3 {
   margin: 0;
 }
 
+.mobile h3 {
+  font-size: 18px;
+}
+
 #header {
   margin: 5px 0 15px;
   text-align: center;
@@ -270,4 +274,8 @@ a {
     stroke-opacity: 1;
     shape-rendering: crispEdges;
   }
+}
+
+.mobile #timeline {
+  height: 75px;
 }

@@ -1,5 +1,11 @@
 // when we're ready, make the app
 window.onload = function() {
+  mobile = new RegExp('(iphone|android)', 'i')
+    .test(navigator.userAgent);
+
+  if (mobile)
+    document.body.classList.add('mobile');
+
   layer = mapbox.layer().id('mattsacks.map-pnviow60');
   // disable panning + zooming
   map = mapbox.map('map', layer, null, []);
