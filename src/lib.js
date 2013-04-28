@@ -46,19 +46,6 @@ Date.prototype.getTenth = function() {
   return clone;
 };
 
-// return a Mustache function of the a template element's innerHTML
-var getTemplate = function(id) {
-  var templateElement = document.id(id + '-template');
-  var templateString = templateElement.innerHTML.trim();
-  return Mustache.compile(templateString);
-};
-
-// render a Mustache function
-var render = function(element, template, data, partials) {
-  element.innerHTML = template(data, partials);
-  return element;
-};
-
 // throttles a function, from underscore.js
 var throttle = function(func, wait) {
   var context, args, timeout, result;

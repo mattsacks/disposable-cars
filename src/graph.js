@@ -401,13 +401,6 @@ Graph.prototype.updateCars = function(timestamp) {
   this.circles.each(update);
 };
 
-// ends any animation loop
-Graph.prototype.stop = function() {
-  if (this['animation'] != null)
-    this.animation = clearTimeout(this.animation);
-  return this;
-};
-
 // return an { x: x, y: y } object from a single location data
 Graph.prototype.getCoords = function(location) {
   var coords = {
