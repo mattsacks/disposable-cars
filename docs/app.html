@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="findCars.html">
+                findCars.js
+              </a>
+            
+              
+              <a class="source" href="app.html">
+                app.js
+              </a>
+            
+              
+              <a class="source" href="calculate.html">
+                calculate.js
+              </a>
+            
+              
+              <a class="source" href="graph.html">
+                graph.js
+              </a>
+            
+              
+              <a class="source" href="lib.html">
+                lib.js
+              </a>
+            
+              
+              <a class="source" href="scripts.html">
+                scripts.js
+              </a>
+            
+              
+              <a class="source" href="upload.html">
+                upload.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>handle loading data asynchronously and the loading animation</p>
+<p>app class</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> App = <span class="keyword">function</span>() {
+  <span class="keyword">this</span>.hasLoaded = <span class="literal">false</span>;
+  <span class="keyword">this</span>.startLoading();
+};
+
+App.prototype.startLoading = <span class="keyword">function</span>() {
+  <span class="keyword">var</span> thiz = <span class="keyword">this</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>start the animation</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.loadElement = document.id(<span class="string">'loader'</span>);
+
+  <span class="keyword">var</span> svg = d3.select(<span class="keyword">this</span>.loadElement)
+    .select(<span class="string">'.load-container'</span>)
+    .append(<span class="string">'svg'</span>)
+    .attr(<span class="string">'class'</span>, <span class="string">'load-animation'</span>);
+  <span class="keyword">var</span> container = svg.append(<span class="string">'svg:g'</span>)
+    .attr(<span class="string">'class'</span>, <span class="string">'circle-container'</span>);
+  container.append(<span class="string">'svg:circle'</span>)
+    .attr({
+      <span class="string">'class'</span>: <span class="string">'big-circle'</span>,
+      <span class="string">'r'</span>: <span class="number">25</span>,
+      <span class="string">'cx'</span>: <span class="number">40</span>,
+      <span class="string">'cy'</span>: <span class="number">50</span>
+    });
+  container.append(<span class="string">'svg:line'</span>)
+    .attr({
+      <span class="string">'class'</span>: <span class="string">'tick'</span>,
+      <span class="string">'transform'</span>: <span class="string">'translate(40, 25)'</span>,
+      <span class="string">'y1'</span>: <span class="number">0</span>,
+      <span class="string">'y2'</span>: <span class="number">13</span>
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>round and round the circle goes</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> rotate = <span class="keyword">function</span>() {
+    container.transition()
+      .duration(<span class="number">1000</span>)
+      .attrTween(<span class="string">'transform'</span>, <span class="keyword">function</span>() {
+        <span class="keyword">return</span> d3.interpolateString(
+          <span class="string">'rotate(0 40 50)'</span>, <span class="string">'rotate(360 40 50)'</span>
+        );
+      })
+      .each(<span class="string">'end'</span>, <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>loop if we haven&#39;t loaded yet</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">if</span> (!thiz.hasLoaded) rotate();
+      });
+  };
+  
+  rotate();
+  <span class="keyword">this</span>.load();
+};
+
+App.prototype.stopLoading = <span class="keyword">function</span>() {
+  <span class="keyword">var</span> thiz = <span class="keyword">this</span>;
+  <span class="keyword">var</span> element = d3.select(<span class="keyword">this</span>.loadElement);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>preserve the rotated state before starting another transition</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> container = element.select(<span class="string">'.circle-container'</span>);
+  <span class="keyword">var</span> rotate = container.attr(<span class="string">'transform'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>end the existing transition</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  container.transition();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>and set the rotated state back</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  container.attr(<span class="string">'transform'</span>, rotate);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>remove the cover over the timeline</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  d3.select(<span class="string">'.timeline-cover'</span>)
+    .transition()
+    .duration(<span class="number">1000</span>)
+    .style(<span class="string">'opacity'</span>, <span class="number">0</span>)
+    .each(<span class="string">'end'</span>, <span class="keyword">function</span>() {
+      <span class="keyword">this</span>.style.display = <span class="string">'none'</span>;
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>fade out and move the loader up</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  element
+    .transition()
+    .duration(<span class="number">1000</span>)
+    .style({
+      <span class="string">'opacity'</span>: <span class="number">0</span>,
+      <span class="string">'top'</span>: -<span class="number">10</span> + <span class="string">'px'</span>
+    })
+    .each(<span class="string">'end'</span>, <span class="keyword">function</span>() {
+      element.classed(<span class="string">'hide'</span>, <span class="literal">true</span>);
+    });
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>load up the page</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>App.prototype.load = <span class="keyword">function</span>() {
+  <span class="keyword">var</span> thiz = <span class="keyword">this</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>set the map height to a % of the window, capped at 900px</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> height = Math.min(window.innerHeight * <span class="number">.675</span>, <span class="number">900</span>);
+  document.id(<span class="string">'map'</span>).style.height = Math.floor(height) + <span class="string">'px'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>reveal shit</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  document.body.classList.remove(<span class="string">'hide'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>load up the data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.loadData(<span class="keyword">function</span>() {
+    thiz.hasLoaded = <span class="literal">true</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>calculate the data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    thiz.data = calculate();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>stop the loader</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    thiz.stopLoading();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>create the graph and draw it out</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    thiz.graph = <span class="keyword">new</span> Graph;
+    thiz.graph.drawTimepath();
+    thiz.graph.drawTimeline();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>start it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    thiz.graph.animate();
+  });
+};
+
+App.prototype.loadData = <span class="keyword">function</span>(callback) {
+  <span class="keyword">if</span> (window[<span class="string">'cars'</span>] != <span class="literal">null</span>) <span class="keyword">return</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>no-op</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  callback = callback || <span class="keyword">function</span>() {};
+
+  <span class="keyword">var</span> script = document.createElement(<span class="string">'script'</span>);
+  script.src = <span class="string">'http://my-s3-bukkit.s3.amazonaws.com/cars.js'</span>;
+  script.type = <span class="string">'text/javascript'</span>;
+  script.onload = callback;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>load it up</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  document.body.appendChild(script);
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>scripts.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="findCars.html">
+                findCars.js
+              </a>
+            
+              
+              <a class="source" href="app.html">
+                app.js
+              </a>
+            
+              
+              <a class="source" href="calculate.html">
+                calculate.js
+              </a>
+            
+              
+              <a class="source" href="graph.html">
+                graph.js
+              </a>
+            
+              
+              <a class="source" href="lib.html">
+                lib.js
+              </a>
+            
+              
+              <a class="source" href="scripts.html">
+                scripts.js
+              </a>
+            
+              
+              <a class="source" href="upload.html">
+                upload.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>scripts.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>when we&#39;re ready, make the app</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>window.onload = <span class="keyword">function</span>() {
+  mobile = <span class="keyword">new</span> RegExp(<span class="string">'(iphone|android)'</span>, <span class="string">'i'</span>)
+    .test(navigator.userAgent);
+
+  <span class="keyword">if</span> (mobile)
+    document.body.classList.add(<span class="string">'mobile'</span>);
+
+  layer = mapbox.layer().id(<span class="string">'mattsacks.map-pnviow60'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>disable panning + zooming</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  map = mapbox.map(<span class="string">'map'</span>, layer, <span class="literal">null</span>, []);
+
+  map.lat = <span class="number">45.53252364902761</span>;
+  map.lon = -<span class="number">122.63711792602537</span>;
+
+  map.centerzoom({
+    lat: map.lat,
+    lon: map.lon
+  }, <span class="number">13</span>);
+
+  app = <span class="keyword">new</span> App();
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,3 +1,5 @@
+// class for creating and animating the graph (and it's timeline)
+
 // constructor
 var Graph = function() {
   // car data and each individual car2go found in portland by license

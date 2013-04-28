@@ -1,3 +1,5 @@
+// handle loading data asynchronously and the loading animation
+
 // app class
 var App = function() {
   this.hasLoaded = false;

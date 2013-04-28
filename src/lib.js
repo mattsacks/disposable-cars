@@ -1,3 +1,5 @@
+// library functions and type modifications
+
 // alias id = getElementById
 document.id = document.getElementById;
 
@@ -6,14 +8,14 @@ Array.prototype.last = function() {
   return this[this.length - 1];
 };
 
-// convert a date to UTC time
+// convert a Date to UTC time
 Date.prototype.inUTC = function() {
   var offset = this.getTimezoneOffset();
   this.setTime(+this + (offset*60000));
   return this;
 };
 
-// convert a Date to portland time
+// convert a Date to Portland time
 Date.prototype.inPortland = function() {
   this.inUTC();
   this.setHours(this.getHours() - 7);

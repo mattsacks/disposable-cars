@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>calculate.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="findCars.html">
+                findCars.js
+              </a>
+            
+              
+              <a class="source" href="app.html">
+                app.js
+              </a>
+            
+              
+              <a class="source" href="calculate.html">
+                calculate.js
+              </a>
+            
+              
+              <a class="source" href="graph.html">
+                graph.js
+              </a>
+            
+              
+              <a class="source" href="lib.html">
+                lib.js
+              </a>
+            
+              
+              <a class="source" href="scripts.html">
+                scripts.js
+              </a>
+            
+              
+              <a class="source" href="upload.html">
+                upload.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>calculate.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>taken from Collector.js</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> mapreduce = <span class="keyword">function</span>(data, mappings, reductions) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>the returned object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> collection = {};
+
+  <span class="keyword">for</span> (<span class="keyword">var</span> item <span class="keyword">in</span> data) {
+    <span class="keyword">var</span> datum = data[item];
+
+    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> mappings) {
+      <span class="keyword">var</span> map = mappings[key], reduce;
+      <span class="keyword">if</span> (map == <span class="literal">null</span>) <span class="keyword">continue</span>;
+
+      reductions != <span class="literal">null</span> &amp;&amp; (reduce = reductions[key]);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>call a map on the piece of data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span> result  = map(datum, item);
+      <span class="keyword">var</span> rolling = collection[key];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>if a reduce function isn&#39;t defined for this key, then just map</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (reduce == <span class="literal">null</span>) {
+        collection[key] = collection[key] || [];
+        collection[key].push(result);
+        <span class="keyword">continue</span>;
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>if there was a result from the mapping, call it as the first
+argument.  otherwise, same format as the mapping</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      result = result != <span class="literal">null</span> ?
+        reduce(rolling, result, datum, item) :
+        reduce(rolling, datum, item);
+
+      collection[key] = result;
+    }
+
+  }
+  <span class="keyword">return</span> collection;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>things to iterate over each car</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> mappings = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>return the delta (in days) between the first and last recorded timestamp</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  numDays: <span class="keyword">function</span>(data, name) {
+    <span class="keyword">var</span> timestamps = Object.keys(data);
+    <span class="keyword">var</span> first = <span class="keyword">new</span> Date(+timestamps[<span class="number">0</span>]).clearTime();
+    <span class="keyword">var</span> last = <span class="keyword">new</span> Date(+timestamps.last()).clearTime();
+    <span class="keyword">return</span> (last - first) / Date.day;
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>get locations on each car</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  locations: <span class="keyword">function</span>(car) {
+    <span class="keyword">if</span> (car.locations != <span class="literal">null</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>delete known keys that aren&#39;t timestamps</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">delete</span> car.locations;
+      <span class="keyword">delete</span> car.locationsLength;
+    }
+    car.locations = Object.keys(car);
+    car.locationsLength = car.locations.length;
+    <span class="keyword">return</span> car;
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>first found timestamp</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  start: <span class="keyword">function</span>(car) {
+    <span class="keyword">return</span> +car.locations[<span class="number">0</span>];
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>last found timestamp</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  end: <span class="keyword">function</span>(car) {
+    <span class="keyword">return</span> +car.locations.last();
+  }
+};
+
+<span class="keyword">var</span> reductions = {
+  numDays: <span class="keyword">function</span>(cur, delta) {
+    cur = cur || <span class="number">0</span>;
+    <span class="keyword">return</span> delta &gt; cur ? delta : cur;
+  },
+  start: <span class="keyword">function</span>(start, earliest) {
+    <span class="keyword">return</span> start == <span class="literal">null</span> ? earliest :
+      earliest &lt; start ? earliest : start;
+  },
+  end: <span class="keyword">function</span>(end, latest) {
+    <span class="keyword">return</span> end == <span class="literal">null</span> ? latest :
+      latest &gt; end ? latest : end;
+  }
+};
+
+<span class="keyword">var</span> calculate = <span class="keyword">function</span>() {
+  <span class="keyword">return</span> mapreduce(cars, mappings, reductions);
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
