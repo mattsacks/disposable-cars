@@ -24,7 +24,7 @@ App.prototype.startLoading = function() {
     });
   container.append('svg:line')
     .attr({
-      'class': 'small-circle',
+      'class': 'tick',
       'transform': 'translate(40, 25)',
       'y1': 0,
       'y2': 13
