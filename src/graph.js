@@ -89,11 +89,13 @@ Graph.prototype.attach = function() {
   // touchmove on the timeline to update it
   timeline.addEventListener('touchmove', throttle(getX, 15));
   // touchstart on the timeline to stop updating
-  timeline.addEventListener('touchstart', function() {
-    thiz.stopAnimating = true;
+  timeline.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    getX(e);
   });
   // touchend on the timeline to continue animating
-  timeline.addEventListener('touchend', function() {
+  timeline.addEventListener('touchend', function(e) {
+    e.preventDefault();
     thiz.stopAnimating = false;
     thiz.animate();
   });
