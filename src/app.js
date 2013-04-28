@@ -24,7 +24,7 @@ App.prototype.load = function() {
 
   // set the map height to a % of the window, capped at 900px
   var height = Math.min(window.innerHeight * .675, 900);
-  document.id('map').style.height = height + 'px';
+  document.id('map').style.height = Math.floor(height) + 'px';
 
   // reveal shit
   document.body.classList.remove('hide');

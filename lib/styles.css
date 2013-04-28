@@ -77,7 +77,8 @@ a {
   font-weight: 700;
   font-size: 38px;
   color: #119fb9;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  white-space: nowrap; }
 
 #day {
   position: absolute;
