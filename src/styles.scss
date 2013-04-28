@@ -11,7 +11,7 @@ $alt-color: darken($bg-color, 33%);
 $dark-color: darken($bg-color, 25%);
 $light-color: rgb(254,254,254);
 $font-color: #555;
-$border-color: rgba($dark-color, 0.25);
+$border-color: rgba($dark-color, 0.7);
 
 // ----- Font Families
 @mixin font-bold {
@@ -145,7 +145,7 @@ a {
 
 // ----- Map
 #map {
-  border-bottom: 1px solid rgba($dark-color, 0.4);
+  border-bottom: 1px solid $border-color;
   border-top: 1px solid $border-color;
   height: $map-height;
   position: relative;
@@ -182,7 +182,7 @@ a {
 
 // ----- Loader
 #loader {
-  background: rgba(0,0,0,0.1);
+  background: darken($bg-color, 5%);
   height: 100%;
   left: 0;
   position: absolute;
@@ -194,19 +194,55 @@ a {
     display: none;
   }
 
-  h4 {
-    @extend .stat;
-    font-size: 50px;
+  .load-container {
     left: 15%;
     position: absolute;
     top: 25%;
   }
+
+  h4 {
+    @extend .stat;
+    // color: white;
+    display: inline-block;
+    font-size: 50px;
+    margin: 0;
+    position: relative;
+    top: 15px;
+    vertical-align: top;
+  }
+
+  .load-animation {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+  }
+
+  .big-circle {
+    fill: none;
+    stroke-width: 3px;
+    stroke: $alt-color;
+  }
+
+  .small-circle {
+    stroke: $alt-color;
+    stroke-width: 3px;
+  }
+}
+
+// ----- Timeline Cover while loading
+.timeline-cover {
+  background: rgba($dark-color, 0.4);
+  margin-top: 1px;
+  height: 60px;
+  position: absolute;
+  width: 100%;
 }
 
 // ----- Timeline
 #timeline {
+  box-shadow: inset 0 1px 0 $bg-color;
   background: rgba($dark-color, 0.4);
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $dark-color;
   height: 60px;
   margin: 0 auto;
   width: 100%;
