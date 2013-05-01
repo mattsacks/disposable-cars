@@ -1,24 +1,31 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:800);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
 #texture, #loader {
-  background-image: url(gray_jean.png); }
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    #texture, #loader {
-      background-image: url(gray_jean@2X.jpg); } }
+  background-image: url(gray_jean.png);
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #texture, #loader {
+    background-image: url(gray_jean@2X.jpg);
+  }
+}
 
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+}
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 body {
   background-color: #80e1f3;
-  color: #555555; }
-  body.hide {
-    opacity: 0; }
+  color: #555555;
+}
+body.hide {
+  opacity: 0;
+}
 
 .background {
   height: 100%;
@@ -26,10 +33,12 @@ body {
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: -1; }
+  z-index: -1;
+}
 
 #color {
-  background-color: rgba(128, 225, 243, 0.85); }
+  background-color: rgba(128, 225, 243, 0.85);
+}
 
 h1 {
   font-family: "Raleway";
@@ -39,10 +48,13 @@ h1 {
   letter-spacing: 0.04em;
   margin: 0;
   padding: 10px 0 5px;
-  text-transform: uppercase; }
-  @media (max-width: 500px) {
-    h1 {
-      font-size: 45px; } }
+  text-transform: uppercase;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 45px;
+  }
+}
 
 h2 {
   font-family: "Raleway";
@@ -50,7 +62,8 @@ h2 {
   color: #fefefe;
   font-size: 25px;
   margin: 0;
-  letter-spacing: 0.04em; }
+  letter-spacing: 0.04em;
+}
 
 h3 {
   font-family: "Georgia";
@@ -58,20 +71,24 @@ h3 {
   color: #fdfefe;
   font-size: 16px;
   font-style: italic;
-  margin: 0; }
+  margin: 0;
+}
 
 .mobile h3 {
-  font-size: 20px; }
+  font-size: 20px;
+}
 
 #header {
   margin: 5px 0 15px;
-  text-align: center; }
+  text-align: center;
+}
 
 #footer {
   margin-top: 15px;
   text-align: center;
   padding-bottom: 2px;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
 a {
   -webkit-transition: color 0.05s linear;
@@ -79,10 +96,12 @@ a {
   -ms-transition: color 0.05s linear;
   transition: color 0.05s linear;
   color: #fefefe;
-  border-bottom: 1px solid #fefefe; }
-  a:hover {
-    color: #fbfbfb;
-    border-bottom-color: #fbfbfb; }
+  border-bottom: 1px solid #fefefe;
+}
+a:hover {
+  color: #fbfbfb;
+  border-bottom-color: #fbfbfb;
+}
 
 .stats-container {
   margin: 0 auto;
@@ -90,7 +109,8 @@ a {
   position: relative;
   top: 5px;
   width: 100%;
-  z-index: 3; }
+  z-index: 3;
+}
 
 .stat, #loader h4 {
   font-family: "Open Sans Condensed";
@@ -98,15 +118,18 @@ a {
   font-size: 38px;
   color: #119fb9;
   text-transform: uppercase;
-  white-space: nowrap; }
+  white-space: nowrap;
+}
 
 #day {
   position: absolute;
-  left: 20px; }
+  left: 20px;
+}
 
 #time {
   position: absolute;
-  right: 20px; }
+  right: 20px;
+}
 
 #map {
   -webkit-user-select: none;
@@ -116,7 +139,8 @@ a {
   border-bottom: 1px solid rgba(21, 191, 222, 0.7);
   border-top: 1px solid rgba(21, 191, 222, 0.5);
   height: 600px;
-  position: relative; }
+  position: relative;
+}
 
 .overlay {
   background-color: #80e1f3;
@@ -126,20 +150,24 @@ a {
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 1; }
+  z-index: 1;
+}
 
 #map-graph {
   height: 100%;
   position: relative;
   width: 100%;
-  z-index: 2; }
+  z-index: 2;
+}
 
 .car {
   fill: #15bfde;
   stroke: #13abc7;
-  stroke-width: 1px; }
-  .car.hide {
-    display: none; }
+  stroke-width: 1px;
+}
+.car.hide {
+  display: none;
+}
 
 #loader {
   height: 100%;
@@ -147,46 +175,55 @@ a {
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 3; }
-  #loader:after {
-    background-color: rgba(105, 219, 241, 0.85);
-    content: "";
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1; }
-  #loader.hide {
-    display: none; }
-  #loader .load-container {
-    left: 15%;
-    position: absolute;
-    top: 25%; }
-  #loader h4 {
-    display: inline-block;
-    font-size: 50px;
-    margin: 0;
-    position: relative;
-    top: 15px;
-    vertical-align: top; }
-  #loader .load-animation {
-    display: inline-block;
-    height: 100px;
-    width: 100px; }
-  #loader .big-circle {
-    fill: none;
-    stroke-width: 4px;
-    stroke: #119fb9; }
-  #loader .tick {
-    stroke: #119fb9;
-    stroke-width: 4px; }
+  z-index: 3;
+}
+#loader:after {
+  background-color: rgba(105, 219, 241, 0.85);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+#loader.hide {
+  display: none;
+}
+#loader .load-container {
+  left: 15%;
+  position: absolute;
+  top: 25%;
+}
+#loader h4 {
+  display: inline-block;
+  font-size: 50px;
+  margin: 0;
+  position: relative;
+  top: 15px;
+  vertical-align: top;
+}
+#loader .load-animation {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+}
+#loader .big-circle {
+  fill: none;
+  stroke-width: 4px;
+  stroke: #119fb9;
+}
+#loader .tick {
+  stroke: #119fb9;
+  stroke-width: 4px;
+}
 
 .timeline-cover {
   background: rgba(21, 191, 222, 0.4);
   height: 60px;
   position: absolute;
-  width: 100%; }
+  width: 100%;
+}
 
 #timeline {
   -webkit-user-select: none;
@@ -197,22 +234,28 @@ a {
   border-bottom: 1px solid #15bfde;
   height: 60px;
   margin: 0 auto;
-  width: 100%; }
-  #timeline .time-marker {
-    stroke: #d56f6f;
-    stroke-width: 3px;
-    stroke-opacity: 0.9;
-    shape-rendering: crispEdges; }
-  #timeline .count-path {
-    stroke: rgba(21, 191, 222, 0.7);
-    fill: none; }
-  #timeline .count-area {
-    fill: #15bfde;
-    fill-opacity: 0.5; }
-  #timeline line {
-    stroke: #80e1f3;
-    stroke-opacity: 1;
-    shape-rendering: crispEdges; }
+  width: 100%;
+}
+#timeline .time-marker {
+  stroke: #d56f6f;
+  stroke-width: 3px;
+  stroke-opacity: 0.9;
+  shape-rendering: crispEdges;
+}
+#timeline .count-path {
+  stroke: rgba(21, 191, 222, 0.7);
+  fill: none;
+}
+#timeline .count-area {
+  fill: #15bfde;
+  fill-opacity: 0.5;
+}
+#timeline line {
+  stroke: #80e1f3;
+  stroke-opacity: 1;
+  shape-rendering: crispEdges;
+}
 
 .mobile #timeline, .mobile .timeline-cover {
-  height: 75px; }
+  height: 75px;
+}
