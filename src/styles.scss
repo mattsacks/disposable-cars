@@ -38,6 +38,10 @@ $border-color: rgba($dark-color, 0.7);
   padding: 5px 12px;
 }
 
+%text-shadow {
+  text-shadow: 0 -1px 0 $dark-color;
+}
+
 %textured {
   background-image: url(gray_jean.png);
 
@@ -107,6 +111,7 @@ body {
 // ----- Headings
 h1 {
   @include font-bold;
+  @extend %text-shadow;
   color: $light-color;
   font-size: 62px;
   letter-spacing: 0.04em;
@@ -121,6 +126,7 @@ h1 {
 
 h2 {
   @include font-bold;
+  @extend %text-shadow;
   color: $light-color;
   font-size: 25px;
   margin: 0;
@@ -129,6 +135,7 @@ h2 {
 
 h3 {
   @include font-serif;
+  @extend %text-shadow;
   color: #fdfefe;
   font-size: 16px;
   font-style: italic;
