@@ -44,7 +44,7 @@ h3 {
   margin: 0; }
 
 .mobile h3 {
-  font-size: 18px; }
+  font-size: 20px; }
 
 #header {
   margin: 5px 0 15px;
@@ -190,5 +190,5 @@ a {
     stroke-opacity: 1;
     shape-rendering: crispEdges; }
 
-.mobile #timeline {
+.mobile #timeline, .mobile .timeline-cover {
   height: 75px; }

@@ -94,7 +94,7 @@ h3 {
 }
 
 .mobile h3 {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 #header {
@@ -276,6 +276,6 @@ a {
   }
 }
 
-.mobile #timeline {
+.mobile #timeline, .mobile .timeline-cover {
   height: 75px;
 }
