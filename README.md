@@ -4,7 +4,7 @@ An exploration of car2go use in Portland over the last three days.
 
 ## Documentation
 
-Commented source code can be found in the `docs/` directory or viewed online at [sacks.io/disposable-cars/docs](sacks.io/disposable-cars/docs).
+Commented source code can be found in the `docs/` directory or viewed online at [sacks.io/disposable-cars/docs](http://sacks.io/disposable-cars/docs).
 
 ## Tools
 
