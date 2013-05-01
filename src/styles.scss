@@ -38,6 +38,29 @@ $border-color: rgba($dark-color, 0.7);
   padding: 5px 12px;
 }
 
+%textured {
+  background-image: url(gray_jean.png);
+
+  @include retina {
+    background-image: url(gray_jean@2X.jpg);
+  }
+}
+
+@mixin textured-bg($background: rgba($bg-color, 0.85)) {
+  @extend %textured;
+
+  &:after {
+    background-color: $background;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+}
+
 // ----- Values
 $map-height: 600px;
 
@@ -54,7 +77,7 @@ a {
 
 // ----- Body
 body {
-  background-color: rgba($bg-color, 0.85);
+  background-color: $bg-color;
   color: $font-color;
 
   &.hide {
@@ -74,11 +97,7 @@ body {
 }
 
 #texture {
-  background-image: url(gray_jean.png);
-
-  @include retina {
-    background-image: url(gray_jean@2X.jpg);
-  }
+  @extend %textured;
 }
 
 #color {
@@ -210,7 +229,7 @@ a {
 
 // ----- Loader
 #loader {
-  background: darken($bg-color, 5%);
+  @include textured-bg(rgba(darken($bg-color, 5%), 0.85));
   height: 100%;
   left: 0;
   position: absolute;
@@ -260,7 +279,6 @@ a {
 // ----- Timeline Cover while loading
 .timeline-cover {
   background: rgba($dark-color, 0.4);
-  margin-top: 1px;
   height: 60px;
   position: absolute;
   width: 100%;

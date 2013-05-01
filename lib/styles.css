@@ -1,5 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:800);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
+#texture, #loader {
+  background-image: url(gray_jean.png); }
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    #texture, #loader {
+      background-image: url(gray_jean@2X.jpg); } }
+
 html, body {
   height: 100%;
   margin: 0;
@@ -9,7 +15,7 @@ a {
   text-decoration: none; }
 
 body {
-  background-color: rgba(128, 225, 243, 0.85);
+  background-color: #80e1f3;
   color: #555555; }
   body.hide {
     opacity: 0; }
@@ -21,12 +27,6 @@ body {
   top: 0;
   width: 100%;
   z-index: -1; }
-
-#texture {
-  background-image: url(gray_jean.png); }
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    #texture {
-      background-image: url(gray_jean@2X.jpg); } }
 
 #color {
   background-color: rgba(128, 225, 243, 0.85); }
@@ -142,13 +142,21 @@ a {
     display: none; }
 
 #loader {
-  background: #69dbf1;
   height: 100%;
   left: 0;
   position: absolute;
   top: 0;
   width: 100%;
   z-index: 3; }
+  #loader:after {
+    background-color: rgba(105, 219, 241, 0.85);
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1; }
   #loader.hide {
     display: none; }
   #loader .load-container {
@@ -176,7 +184,6 @@ a {
 
 .timeline-cover {
   background: rgba(21, 191, 222, 0.4);
-  margin-top: 1px;
   height: 60px;
   position: absolute;
   width: 100%; }
