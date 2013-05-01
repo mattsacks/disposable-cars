@@ -102,10 +102,15 @@ Graph.prototype.attach = function() {
     thiz.animate();
   });
 
-  this.container.node().addEventListener('mouseover', function() {
-    thiz.stopAnimating = false;
-    thiz.animate();
-  });
+  // mousing out of the timeline should start the animation again
+  var start = function() {
+    if (thiz.stopAnimating) {
+      thiz.stopAnimating = false;
+      thiz.animate();
+    }
+  };
+  this.container.node().addEventListener('mouseover', start);
+  document.id('footer').addEventListener('mouseover', start);
 
   window.addEventListener('resize', throttle(function() {
     // cache the current timestamp
