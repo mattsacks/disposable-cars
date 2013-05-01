@@ -103,16 +103,26 @@ App.prototype.load = function() {
     // calculate the data
     thiz.data = calculate();
 
-    // stop the loader
-    thiz.stopLoading();
+    var start = function() {
+      // create the graph and draw it out
+      thiz.graph = new Graph;
+      thiz.graph.drawTimepath();
+      thiz.graph.drawTimeline();
 
-    // create the graph and draw it out
-    thiz.graph = new Graph;
-    thiz.graph.drawTimepath();
-    thiz.graph.drawTimeline();
+      // start it
+      thiz.graph.animate();
+    };
 
-    // start it
-    thiz.graph.animate();
+    // on mobile, load the graph before animating
+    if (mobile) {
+      start();
+      thiz.stopLoading();
+    }
+    // otherwise, do it async
+    else {
+      thiz.stopLoading();
+      start();
+    }
   });
 };
 
